@@ -8,51 +8,96 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.widget.*
 import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
+import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.UI
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class LastMatchFragment : Fragment() {
+class LastMatchFragment : Fragment(), MatchView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View?
-        = LastMatchFragmentUI<Fragment>().createView(AnkoContext.create(ctx, this))
-}
-
-class LastMatchFragmentUI<T>: AnkoComponent<T> {
-    private lateinit var listTeam: RecyclerView
+    private var events: MutableList<Event> = mutableListOf()
+    private lateinit var presenter: LastMatchPresenter
+    private lateinit var adapter: LastMatchAdapter
+    private lateinit var listEvent: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
+    private lateinit var leagueName: String
 
-    override fun createView(ui: AnkoContext<T>) = with(ui) {
-        linearLayout {
-            lparams (width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
-            spinner = spinner ()
-            swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(colorAccent)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-                relativeLayout{
-                    lparams (width = matchParent, height = wrapContent)
+        val spinnerItems = resources.getStringArray(R.array.league)
+        val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        spinner.adapter = spinnerAdapter
 
-                    listTeam = recyclerView {
+        adapter = LastMatchAdapter(events)
+        listEvent.adapter = adapter
+
+        val request = ApiRepository()
+        val gson = Gson()
+        presenter = LastMatchPresenter(this, request, gson)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                leagueName = spinner.selectedItem.toString()
+                presenter.getTeamList(leagueName)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        swipeRefresh.onRefresh {
+            presenter.getTeamList(leagueName)
+        }
+
+
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return UI {
+            linearLayout {
+                lparams (width = matchParent, height = wrapContent)
+                orientation = LinearLayout.VERTICAL
+                spinner = spinner ()
+                swipeRefresh = swipeRefreshLayout {
+                    setColorSchemeResources(colorAccent)
+
+                    relativeLayout{
                         lparams (width = matchParent, height = wrapContent)
-                        layoutManager = LinearLayoutManager(ctx)
-                    }
 
-                    progressBar = progressBar {
-                    }.lparams{
-                        centerHorizontally()
+                        listEvent = recyclerView {
+                            lparams (width = matchParent, height = wrapContent)
+                            layoutManager = LinearLayoutManager(ctx)
+                        }
+
+                        progressBar = progressBar {
+                        }.lparams{
+                            centerHorizontally()
+                        }
                     }
                 }
             }
-        }
+        }.view
+    }
 
+    override fun showLoading() {
+        progressBar.visible()
+    }
+
+    override fun hideLoading() {
+        progressBar.invisible()
+    }
+
+    override fun showTeamList(data: List<Event>) {
+        swipeRefresh.isRefreshing = false
+        events.clear()
+        events.addAll(data)
+        adapter.notifyDataSetChanged()
     }
 }
