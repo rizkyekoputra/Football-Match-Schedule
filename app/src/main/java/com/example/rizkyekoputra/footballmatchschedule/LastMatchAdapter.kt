@@ -11,7 +11,7 @@ import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
-class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatchAdapter.EventViewHolder>(){
+class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatchAdapter.EventViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         return EventViewHolder(EventUI().createView(AnkoContext.create(parent.context, parent)))
@@ -23,7 +23,7 @@ class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatch
         holder.bindItem(events[position])
     }
 
-    class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val tvMatchDate: TextView = itemView.find(R.id.match_date)
         private val tvHomeTeamName: TextView = itemView.find(R.id.home_team_name)
@@ -42,7 +42,7 @@ class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatch
 }
 
 class EventUI : AnkoComponent<ViewGroup> {
-    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui){
+    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
         frameLayout {
             cardView {
                 layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
@@ -65,7 +65,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                             id = R.id.match_date
                             gravity = Gravity.CENTER
                             textSize = 12f
-                        }.lparams{
+                        }.lparams {
                             width = matchParent
                         }
 

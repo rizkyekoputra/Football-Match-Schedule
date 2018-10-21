@@ -46,7 +46,7 @@ class LastMatchFragment : Fragment(), MatchView {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
-                when(leagueName){
+                when (leagueName) {
                     "English Premier League" -> presenter.getTeamList("4328")
                     "English League Championship" -> presenter.getTeamList("4329")
                     "German Bundesliga" -> presenter.getTeamList("4331")
@@ -61,7 +61,7 @@ class LastMatchFragment : Fragment(), MatchView {
         }
 
         swipeRefresh.onRefresh {
-            when(leagueName){
+            when (leagueName) {
                 "English Premier League" -> presenter.getTeamList("4328")
                 "English League Championship" -> presenter.getTeamList("4329")
                 "German Bundesliga" -> presenter.getTeamList("4331")
@@ -76,23 +76,23 @@ class LastMatchFragment : Fragment(), MatchView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             linearLayout {
-                lparams (width = matchParent, height = wrapContent)
+                lparams(width = matchParent, height = wrapContent)
                 orientation = LinearLayout.VERTICAL
-                spinner = spinner ()
+                spinner = spinner()
                 swipeRefresh = swipeRefreshLayout {
                     setColorSchemeResources(colorAccent)
 
-                    relativeLayout{
-                        lparams (width = matchParent, height = wrapContent)
+                    relativeLayout {
+                        lparams(width = matchParent, height = wrapContent)
 
                         listEvent = recyclerView {
-                            lparams (width = matchParent, height = wrapContent)
+                            lparams(width = matchParent, height = wrapContent)
 
                             layoutManager = LinearLayoutManager(ctx)
                         }
 
                         progressBar = progressBar {
-                        }.lparams{
+                        }.lparams {
                             centerHorizontally()
                         }
                     }
