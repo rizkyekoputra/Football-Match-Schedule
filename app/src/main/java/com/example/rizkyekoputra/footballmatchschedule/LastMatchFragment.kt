@@ -46,17 +46,31 @@ class LastMatchFragment : Fragment(), MatchView {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
-                presenter.getTeamList(leagueName)
+                when(leagueName){
+                    "English Premier League" -> presenter.getTeamList("4328")
+                    "English League Championship" -> presenter.getTeamList("4329")
+                    "German Bundesliga" -> presenter.getTeamList("4331")
+                    "Italian Serie A" -> presenter.getTeamList("4332")
+                    "French Ligue 1" -> presenter.getTeamList("4334")
+                    "Spanish La Liga" -> presenter.getTeamList("4335")
+                    else -> presenter.getTeamList("4336")
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         swipeRefresh.onRefresh {
-            presenter.getTeamList(leagueName)
+            when(leagueName){
+                "English Premier League" -> presenter.getTeamList("4328")
+                "English League Championship" -> presenter.getTeamList("4329")
+                "German Bundesliga" -> presenter.getTeamList("4331")
+                "Italian Serie A" -> presenter.getTeamList("4332")
+                "French Ligue 1" -> presenter.getTeamList("4334")
+                "Spanish La Liga" -> presenter.getTeamList("4335")
+                else -> presenter.getTeamList("4336")
+            }
         }
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,6 +87,7 @@ class LastMatchFragment : Fragment(), MatchView {
 
                         listEvent = recyclerView {
                             lparams (width = matchParent, height = wrapContent)
+
                             layoutManager = LinearLayoutManager(ctx)
                         }
 

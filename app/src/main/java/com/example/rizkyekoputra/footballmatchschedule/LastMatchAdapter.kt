@@ -1,11 +1,15 @@
 package com.example.rizkyekoputra.footballmatchschedule
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import org.jetbrains.anko.*
+import org.jetbrains.anko.cardview.v7.cardView
 
 class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatchAdapter.EventViewHolder>(){
 
@@ -21,43 +25,130 @@ class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatch
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        lateinit var tvHomeTeamName: TextView
-        lateinit var tvAwayTeamName: TextView
+        private val tvMatchDate: TextView = itemView.find(R.id.match_date)
+        private val tvHomeTeamName: TextView = itemView.find(R.id.home_team_name)
+        private val tvAwayTeamName: TextView = itemView.find(R.id.away_team_name)
+        private val tvHomeScore: TextView = itemView.find(R.id.home_score)
+        private val tvAwayScore: TextView = itemView.find(R.id.away_score)
 
         fun bindItem(events: Event) {
-            tvHomeTeamName = itemView.findViewById(R.id.home_team_name) as TextView
-            tvAwayTeamName = itemView.findViewById(R.id.away_team_name) as TextView
-
+            tvMatchDate.text = events.dateEvent?.let { DateHelper.formatDateToString(it) }
             tvHomeTeamName.text = events.homeTeamName
             tvAwayTeamName.text = events.awayTeamName
+            tvHomeScore.text = events.homeScore.toString()
+            tvAwayScore.text = events.awayScore.toString()
         }
-
     }
 }
 
 class EventUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui){
-        linearLayout {
-            lparams(width = matchParent, height = wrapContent)
-            padding = dip(16)
-            orientation = LinearLayout.HORIZONTAL
+        frameLayout {
+            cardView {
+                layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
+                    leftMargin = dip(10)
+                    rightMargin = dip(10)
+                    topMargin = dip(5)
+                    bottomMargin = dip(5)
 
-            textView {
-                id = R.id.home_team_name
-                textSize = 16f
-            }.lparams{
-                margin = dip(15)
+                }
+                backgroundColor = Color.WHITE
+                radius = dip(8).toFloat()
+
+                relativeLayout {
+                    padding = dip(10)
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView {
+                            id = R.id.match_date
+                            gravity = Gravity.CENTER
+                            textSize = 12f
+                        }.lparams{
+                            width = matchParent
+                        }
+
+                        linearLayout {
+                            orientation = LinearLayout.HORIZONTAL
+
+                            linearLayout {
+                                orientation = LinearLayout.VERTICAL
+
+                                textView {
+                                    id = R.id.home_team_name
+                                    gravity = Gravity.CENTER
+                                    textSize = 16f
+                                }.lparams(width = matchParent, height = wrapContent)
+                            }.lparams(width = dip(0), height = wrapContent) {
+                                gravity = Gravity.CENTER
+                                weight = 3F
+                                leftMargin = dip(20)
+                            }
+
+                            linearLayout {
+                                orientation = LinearLayout.HORIZONTAL
+                                textView {
+                                    id = R.id.home_score
+                                    textSize = 28f
+                                    gravity = Gravity.CENTER
+                                }.lparams(width = matchParent, height = wrapContent) {
+                                    gravity = Gravity.CENTER_HORIZONTAL
+                                }
+                            }.lparams(width = dip(0), height = wrapContent) {
+                                gravity = Gravity.CENTER
+                                weight = 0.5F
+                                leftMargin = dip(20)
+                                rightMargin = dip(10)
+                            }
+
+                            linearLayout {
+                                orientation = LinearLayout.HORIZONTAL
+                                textView("VS") {
+                                    textSize = 18f
+                                    gravity = Gravity.CENTER
+                                }.lparams(width = matchParent, height = wrapContent) {
+                                    gravity = Gravity.CENTER_HORIZONTAL
+                                }
+                            }.lparams(width = dip(0), height = wrapContent) {
+                                gravity = Gravity.CENTER
+                                weight = 1F
+                            }
+
+                            linearLayout {
+                                orientation = LinearLayout.HORIZONTAL
+
+                                textView {
+                                    id = R.id.away_score
+                                    textSize = 28f
+                                    gravity = Gravity.CENTER
+                                }.lparams(width = matchParent, height = wrapContent)
+                            }.lparams(width = dip(0), height = wrapContent) {
+                                gravity = Gravity.CENTER
+                                weight = 0.5F
+                                rightMargin = dip(20)
+                                leftMargin = dip(10)
+                            }
+
+                            linearLayout {
+                                orientation = LinearLayout.VERTICAL
+
+                                textView {
+                                    id = R.id.away_team_name
+                                    gravity = Gravity.CENTER
+                                    textSize = 16f
+                                }.lparams(width = matchParent, height = wrapContent) {
+                                }
+                            }.lparams(width = dip(0), height = wrapContent) {
+                                gravity = Gravity.CENTER
+                                weight = 3F
+                                rightMargin = dip(20)
+                            }
+                        }.lparams(width = matchParent, height = wrapContent)
+                    }.lparams(width = matchParent, height = wrapContent)
+                }
             }
-
-            textView {
-                id = R.id.away_team_name
-                textSize = 16f
-            }.lparams{
-                margin = dip(15)
-            }
-
         }
     }
-
 }
 

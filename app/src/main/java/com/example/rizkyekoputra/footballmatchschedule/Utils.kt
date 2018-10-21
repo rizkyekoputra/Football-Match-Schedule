@@ -1,6 +1,8 @@
 package com.example.rizkyekoputra.footballmatchschedule
 
 import android.view.View
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -8,4 +10,10 @@ fun View.visible() {
 
 fun View.invisible() {
     visibility = View.INVISIBLE
+}
+
+object DateHelper {
+    fun formatDateToString(date: Date): String {
+        return SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(date)
+    }
 }
