@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -51,4 +54,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     implementation "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+    implementation "com.squareup.picasso:picasso:$picaso_version"
 }

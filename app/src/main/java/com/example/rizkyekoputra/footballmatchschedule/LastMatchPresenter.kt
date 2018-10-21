@@ -22,5 +22,4 @@ class LastMatchPresenter(private val view: MatchView,
             }
         }
     }
-
 }

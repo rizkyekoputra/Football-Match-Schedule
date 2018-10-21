@@ -1,8 +1,11 @@
 package com.example.rizkyekoputra.footballmatchschedule
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Event(
         @SerializedName("idEvent")
         var eventId: String? = null,
@@ -102,4 +105,4 @@ data class Event(
 
         @SerializedName("idAwayTeam")
         var awayTeamId: String? = null
-)
+): Parcelable

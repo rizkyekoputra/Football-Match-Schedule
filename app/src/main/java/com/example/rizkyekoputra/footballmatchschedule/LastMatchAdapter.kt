@@ -31,12 +31,16 @@ class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatch
         private val tvHomeScore: TextView = itemView.find(R.id.home_score)
         private val tvAwayScore: TextView = itemView.find(R.id.away_score)
 
-        fun bindItem(events: Event) {
-            tvMatchDate.text = events.dateEvent?.let { DateHelper.formatDateToString(it) }
-            tvHomeTeamName.text = events.homeTeamName
-            tvAwayTeamName.text = events.awayTeamName
-            tvHomeScore.text = events.homeScore.toString()
-            tvAwayScore.text = events.awayScore.toString()
+        fun bindItem(event: Event) {
+            tvMatchDate.text = event.dateEvent?.let { DateHelper.formatDateToString(it) }
+            tvHomeTeamName.text = event.homeTeamName
+            tvAwayTeamName.text = event.awayTeamName
+            tvHomeScore.text = event.homeScore.toString()
+            tvAwayScore.text = event.awayScore.toString()
+
+            itemView.setOnClickListener {
+                itemView.context.startActivity<DetailActivity>("match" to event)
+            }
         }
     }
 }
