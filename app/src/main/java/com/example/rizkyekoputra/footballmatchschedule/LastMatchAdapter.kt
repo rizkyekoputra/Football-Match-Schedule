@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
@@ -35,8 +36,8 @@ class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatch
             tvMatchDate.text = event.dateEvent?.let { DateHelper.formatDateToString(it) }
             tvHomeTeamName.text = event.homeTeamName
             tvAwayTeamName.text = event.awayTeamName
-            tvHomeScore.text = event.homeScore.toString()
-            tvAwayScore.text = event.awayScore.toString()
+            tvHomeScore.text = event.homeScore.let { it?.toString() ?: "" }
+            tvAwayScore.text = event.awayScore.let { it?.toString() ?: "" }
 
             itemView.setOnClickListener {
                 itemView.context.startActivity<DetailActivity>("match" to event)
@@ -60,6 +61,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                 radius = dip(8).toFloat()
 
                 relativeLayout {
+                    layoutParams = RelativeLayout.LayoutParams(matchParent, dip(70))
                     padding = dip(10)
 
                     linearLayout {
