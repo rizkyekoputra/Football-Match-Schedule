@@ -23,9 +23,9 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "First Tab"
+            0 -> "LAST MATCH"
             else -> {
-                return "Second Tab"
+                return "NEXT MATCH"
             }
         }
     }

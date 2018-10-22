@@ -22,13 +22,34 @@ class DetailActivity : AppCompatActivity(), DetailView {
     lateinit var awayScoreTv: TextView
     lateinit var homeNameTv: TextView
     lateinit var awayNameTv: TextView
+    lateinit var homeGoalsTv: TextView
+    lateinit var awayGoalsTv: TextView
+    lateinit var homeShotsTv: TextView
+    lateinit var awayShotsTv: TextView
+    lateinit var homeGoalKeeperTv: TextView
+    lateinit var awayGoalKeeperTv: TextView
+    lateinit var homeDefenseTv: TextView
+    lateinit var awayDefenseTv: TextView
+    lateinit var homeMidfieldTv: TextView
+    lateinit var awayMidfieldTv: TextView
+    lateinit var homeForwardTv: TextView
+    lateinit var awayForwardTv: TextView
+    lateinit var homeSubtitutesTv: TextView
+    lateinit var awaySubtitutesTv: TextView
 
     override fun displayHomeTeamBadge(team: Team) {
-        Picasso.get().load(team.teamBadgeUrl).into(homeBadgeIv)
+        Picasso.get()
+                .load(team.teamBadgeUrl)
+                .placeholder(R.drawable.default_placeholder)
+                .resize(dip(90), dip(90))
+                .into(homeBadgeIv)
     }
 
     override fun displayAwayTeamBadge(team: Team) {
-        Picasso.get().load(team.teamBadgeUrl).into(awayBadgeIv)
+        Picasso.get()
+                .load(team.teamBadgeUrl)
+                .placeholder(R.drawable.default_placeholder)
+                .into(awayBadgeIv)
     }
 
     private lateinit var mPresenter: DetailPresenter
@@ -54,6 +75,20 @@ class DetailActivity : AppCompatActivity(), DetailView {
         homeScoreTv.text = event.homeScore.let { it?.toString() ?: "" }
         awayNameTv.text = event.awayTeamName
         awayScoreTv.text = event.awayScore.let { it?.toString() ?: "" }
+        homeGoalsTv.text = event.homeGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
+        awayGoalsTv.text = event.awayGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeShotsTv.text = event.homeShots.toString()
+        awayShotsTv.text = event.awayShots.toString()
+        homeGoalKeeperTv.text = event.homeLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
+        awayGoalKeeperTv.text = event.awayLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeDefenseTv.text = event.homeLineupDefense?.let { StringHelper.replaceColonWithNewLine(it) }
+        awayDefenseTv.text = event.awayLineupDefense?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeMidfieldTv.text = event.homeLineupMidfield?.let { StringHelper.replaceColonWithNewLine(it) }
+        awayMidfieldTv.text = event.awayLineupMidfield?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeForwardTv.text = event.homeLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
+        awayForwardTv.text = event.awayLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeSubtitutesTv.text = event.homeLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
+        awaySubtitutesTv.text = event.awayLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
     }
 }
 
@@ -64,103 +99,425 @@ class DetailActivityUI : AnkoComponent<DetailActivity> {
                 orientation = LinearLayout.VERTICAL
                 padding = dip(8)
 
-                frameLayout {
-                    cardView {
-                        layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
-                            leftMargin = dip(10)
-                            rightMargin = dip(10)
-                            topMargin = dip(5)
-                            bottomMargin = dip(5)
+                cardView {
+                    layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT).apply {
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                        topMargin = dip(5)
+                        bottomMargin = dip(5)
 
-                        }
-                        backgroundColor = Color.WHITE
-                        radius = dip(8).toFloat()
+                    }
+                    backgroundColor = Color.WHITE
+                    radius = dip(8).toFloat()
 
-                        relativeLayout{
-                            linearLayout{
-                                orientation = LinearLayout.VERTICAL
+                    relativeLayout {
+                        linearLayout {
+                            orientation = LinearLayout.VERTICAL
 
-                                owner.matchDateTv = textView {
-                                    gravity = Gravity.CENTER_HORIZONTAL
+                            owner.matchDateTv = textView {
+                            }.lparams {
+                                gravity = Gravity.CENTER
+                                bottomMargin = dip(10)
+                            }
+
+                            linearLayout {
+                                orientation = LinearLayout.HORIZONTAL
+
+                                linearLayout {
+                                    orientation = LinearLayout.VERTICAL
+
+                                    owner.homeBadgeIv = imageView {
+                                    }.lparams(width = dip(90), height = dip(90)) {
+                                        gravity = Gravity.CENTER
+                                    }
+
+                                    owner.homeNameTv = textView {
+                                        gravity = Gravity.CENTER
+                                        textSize = 20f
+                                    }.lparams(matchParent, wrapContent) {
+                                        topMargin = dip(4)
+                                    }
+                                }.lparams(width = dip(0), height = wrapContent) {
+                                    weight = 3F
                                 }
 
                                 linearLayout {
-                                    orientation = LinearLayout.HORIZONTAL
+                                    orientation = LinearLayout.VERTICAL
 
-                                    linearLayout {
-                                        orientation = LinearLayout.VERTICAL
-
-                                        owner.homeBadgeIv = imageView {
-                                        }.lparams(width = dip(90), height = dip(90)) {
-                                            gravity = Gravity.CENTER
-                                        }
-
-                                        owner.homeNameTv = textView {
-                                            gravity = Gravity.CENTER
-                                        }.lparams(matchParent, wrapContent) {
-                                            topMargin = dip(4)
-                                        }
-                                    }.lparams(width = dip(0), height = wrapContent){
-                                        weight = 3F
-                                    }
-
-                                    linearLayout {
-                                        orientation = LinearLayout.VERTICAL
-
-                                        owner.homeScoreTv = textView {
-                                            gravity = Gravity.CENTER
-                                            textSize = 32f
-                                        }.lparams(matchParent, wrapContent)
-                                    }.lparams(width = dip(0), height = wrapContent) {
+                                    owner.homeScoreTv = textView {
                                         gravity = Gravity.CENTER
-                                        weight = 0.5F
-                                    }
+                                        textSize = 40f
+                                    }.lparams(matchParent, wrapContent)
+                                }.lparams(width = dip(0), height = wrapContent) {
+                                    gravity = Gravity.CENTER
+                                    weight = 0.5F
+                                }
 
-                                    linearLayout {
-                                        orientation = LinearLayout.VERTICAL
+                                linearLayout {
+                                    orientation = LinearLayout.VERTICAL
 
-                                        textView("VS") {
-                                            gravity = Gravity.CENTER
-                                            textSize = 18f
-                                        }.lparams(matchParent, wrapContent)
-                                    }.lparams(width = dip(0), height = wrapContent) {
+                                    textView("VS") {
                                         gravity = Gravity.CENTER
-                                        weight = 1F
-                                    }
+                                        textSize = 18f
+                                    }.lparams(matchParent, wrapContent)
+                                }.lparams(width = dip(0), height = wrapContent) {
+                                    gravity = Gravity.CENTER
+                                    weight = 1F
+                                }
 
-                                    linearLayout {
-                                        orientation = LinearLayout.VERTICAL
+                                linearLayout {
+                                    orientation = LinearLayout.VERTICAL
 
-                                        owner.awayScoreTv = textView {
-                                            gravity = Gravity.CENTER
-                                            textSize = 32f
-                                        }.lparams(matchParent, wrapContent)
-                                    }.lparams(width = dip(0), height = wrapContent) {
+                                    owner.awayScoreTv = textView {
                                         gravity = Gravity.CENTER
-                                        weight = 0.5F
+                                        textSize = 40f
+                                    }.lparams(matchParent, wrapContent)
+                                }.lparams(width = dip(0), height = wrapContent) {
+                                    gravity = Gravity.CENTER
+                                    weight = 0.5F
+                                }
+
+                                linearLayout {
+                                    orientation = LinearLayout.VERTICAL
+
+                                    owner.awayBadgeIv = imageView {
+                                    }.lparams(width = dip(90), height = dip(90)) {
+                                        gravity = Gravity.CENTER
                                     }
 
-                                    linearLayout {
-                                        orientation = LinearLayout.VERTICAL
-
-                                        owner.awayBadgeIv = imageView {
-                                        }.lparams(width = dip(90), height = dip(90)) {
-                                            gravity = Gravity.CENTER
-                                        }
-
-                                        owner.awayNameTv = textView {
-                                            gravity = Gravity.CENTER
-                                        }.lparams(matchParent, wrapContent) {
-                                            topMargin = dip(4)
-                                        }
-                                    }.lparams(width = dip(0), height = wrapContent) {
-                                        weight = 3F
+                                    owner.awayNameTv = textView {
+                                        gravity = Gravity.CENTER
+                                        textSize = 20f
+                                    }.lparams(matchParent, wrapContent) {
+                                        topMargin = dip(4)
                                     }
-                                }.lparams(matchParent, wrapContent)
-                            }.lparams(matchParent, wrapContent)
-                        }
-                    }.lparams(matchParent, wrapContent)
+                                }.lparams(width = dip(0), height = wrapContent) {
+                                    weight = 3F
+                                }
+                            }.lparams(matchParent, wrapContent) {
+                                bottomMargin = dip(10)
+                            }
+                        }.lparams(matchParent, wrapContent)
+                    }
+                }.lparams(matchParent, wrapContent)
+
+                view {
+                    backgroundColor = Color.LTGRAY
+                }.lparams(matchParent, dip(1)) {
+                    topMargin = dip(10)
+                    bottomMargin = dip(10)
                 }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeGoalsTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent) {
+                            topMargin = dip(4)
+                        }
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Goals") {
+                            gravity = Gravity.CENTER
+                            textSize = 18f
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayGoalsTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent) {
+                            topMargin = dip(4)
+                        }
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(20)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeShotsTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent) {
+                            topMargin = dip(4)
+                        }
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Shots") {
+                            gravity = Gravity.CENTER
+                            textSize = 18f
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayShotsTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent) {
+                            topMargin = dip(4)
+                        }
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(10)
+                }
+
+                view {
+                    backgroundColor = Color.LTGRAY
+                }.lparams(matchParent, dip(1)) {
+                    bottomMargin = dip(10)
+                }
+
+                textView("Lineups") {
+                    textSize = 18f
+                }.lparams {
+                    gravity = Gravity.CENTER
+                    bottomMargin = dip(20)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeGoalKeeperTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Goal Keeper") {
+                            gravity = Gravity.CENTER
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayGoalKeeperTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(15)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeDefenseTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Defense") {
+                            gravity = Gravity.CENTER
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayDefenseTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(15)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeMidfieldTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Midfield") {
+                            gravity = Gravity.CENTER
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayMidfieldTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(15)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeForwardTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Forward") {
+                            gravity = Gravity.CENTER
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awayForwardTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(15)
+                }
+
+                linearLayout {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.homeSubtitutesTv = textView {
+                            gravity = Gravity.LEFT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        textView("Substitutes") {
+                            gravity = Gravity.CENTER
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 1.5F
+                        leftMargin = dip(10)
+                        rightMargin = dip(10)
+                    }
+
+                    linearLayout {
+                        orientation = LinearLayout.VERTICAL
+
+                        owner.awaySubtitutesTv = textView {
+                            gravity = Gravity.RIGHT
+                        }.lparams(matchParent, wrapContent)
+                    }.lparams(width = dip(0), height = wrapContent) {
+                        gravity = Gravity.TOP
+                        weight = 3F
+                    }
+                }.lparams(matchParent, wrapContent) {
+                    bottomMargin = dip(15)
+                }
+
             }.lparams(matchParent, wrapContent)
         }
     }

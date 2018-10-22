@@ -61,7 +61,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                 radius = dip(8).toFloat()
 
                 relativeLayout {
-                    layoutParams = RelativeLayout.LayoutParams(matchParent, dip(70))
+                    layoutParams = RelativeLayout.LayoutParams(matchParent, wrapContent)
                     padding = dip(10)
 
                     linearLayout {
@@ -89,7 +89,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                             }.lparams(width = dip(0), height = wrapContent) {
                                 gravity = Gravity.CENTER
                                 weight = 3F
-                                leftMargin = dip(20)
+                                leftMargin = dip(5)
                             }
 
                             linearLayout {
@@ -103,7 +103,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                                 }
                             }.lparams(width = dip(0), height = wrapContent) {
                                 gravity = Gravity.CENTER
-                                weight = 0.5F
+                                weight = 0.7F
                                 leftMargin = dip(20)
                                 rightMargin = dip(10)
                             }
@@ -131,7 +131,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                                 }.lparams(width = matchParent, height = wrapContent)
                             }.lparams(width = dip(0), height = wrapContent) {
                                 gravity = Gravity.CENTER
-                                weight = 0.5F
+                                weight = 0.7F
                                 rightMargin = dip(20)
                                 leftMargin = dip(10)
                             }
@@ -148,7 +148,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                             }.lparams(width = dip(0), height = wrapContent) {
                                 gravity = Gravity.CENTER
                                 weight = 3F
-                                rightMargin = dip(20)
+                                rightMargin = dip(5)
                             }
                         }.lparams(width = matchParent, height = wrapContent)
                     }.lparams(width = matchParent, height = wrapContent)
