@@ -1,9 +1,26 @@
 <resources>
     <string name="app_name">Football Match Schedule</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="match_detail">Match Detail</string>
+
+    <string name="uefa_champions_league">UEFA Champions League</string>
+    <string name="english_premier_league">English Premier League</string>
+    <string name="english_league_championship">English League Championship</string>
+    <string name="german_bundesliga">German Bundesliga</string>
+    <string name="italian_serie_a">Italian Serie A</string>
+    <string name="french_ligue_1">French Ligue 1</string>
+    <string name="spanish_la_liga">Spanish La Liga</string>
+
+    <string name="uefa_champions_league_code">4480</string>
+    <string name="english_premier_league_code">4328</string>
+    <string name="english_league_championship_code">4329</string>
+    <string name="german_bundesliga_code">4331</string>
+    <string name="italian_serie_a_code">4332</string>
+    <string name="french_ligue_1_code">4334</string>
+    <string name="spanish_la_liga_code">4335</string>
+
+    <string name="next_match">NEXT MATCH</string>
+    <string name="last_match">LAST MATCH</string>
+
     <array name="league">
         <item>English Premier League</item>
         <item>English League Championship</item>
@@ -11,5 +28,6 @@
         <item>Italian Serie A</item>
         <item>French Ligue 1</item>
         <item>Spanish La Liga</item>
+        <item>UEFA Champions League</item>
     </array>
 </resources>

@@ -55,13 +55,14 @@ class LastMatchFragment : Fragment(), MatchView {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
                 when (leagueName) {
-                    "English Premier League" -> presenter.getTeamList("4328", leagueType)
-                    "English League Championship" -> presenter.getTeamList("4329", leagueType)
-                    "German Bundesliga" -> presenter.getTeamList("4331", leagueType)
-                    "Italian Serie A" -> presenter.getTeamList("4332", leagueType)
-                    "French Ligue 1" -> presenter.getTeamList("4334", leagueType)
-                    "Spanish La Liga" -> presenter.getTeamList("4335", leagueType)
-                    else -> presenter.getTeamList("4336", leagueType)
+                    getString(R.string.uefa_champions_league) -> presenter.getTeamList(getString(R.string.uefa_champions_league_code), leagueType)
+                    getString(R.string.english_premier_league) -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
+                    getString(R.string.english_league_championship) -> presenter.getTeamList(getString(R.string.english_league_championship_code), leagueType)
+                    getString(R.string.german_bundesliga) -> presenter.getTeamList(getString(R.string.german_bundesliga_code), leagueType)
+                    getString(R.string.italian_serie_a) -> presenter.getTeamList(getString(R.string.italian_serie_a_code), leagueType)
+                    getString(R.string.french_ligue_1) -> presenter.getTeamList(getString(R.string.french_ligue_1_code), leagueType)
+                    getString(R.string.spanish_la_liga) -> presenter.getTeamList(getString(R.string.spanish_la_liga_code), leagueType)
+                    else -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
                 }
             }
 
@@ -70,13 +71,14 @@ class LastMatchFragment : Fragment(), MatchView {
 
         swipeRefresh.onRefresh {
             when (leagueName) {
-                "English Premier League" -> presenter.getTeamList("4328", leagueType)
-                "English League Championship" -> presenter.getTeamList("4329", leagueType)
-                "German Bundesliga" -> presenter.getTeamList("4331", leagueType)
-                "Italian Serie A" -> presenter.getTeamList("4332", leagueType)
-                "French Ligue 1" -> presenter.getTeamList("4334", leagueType)
-                "Spanish La Liga" -> presenter.getTeamList("4335", leagueType)
-                else -> presenter.getTeamList("4336", leagueType)
+                getString(R.string.uefa_champions_league) -> presenter.getTeamList(getString(R.string.uefa_champions_league_code), leagueType)
+                getString(R.string.english_premier_league) -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
+                getString(R.string.english_league_championship) -> presenter.getTeamList(getString(R.string.english_league_championship_code), leagueType)
+                getString(R.string.german_bundesliga) -> presenter.getTeamList(getString(R.string.german_bundesliga_code), leagueType)
+                getString(R.string.italian_serie_a) -> presenter.getTeamList(getString(R.string.italian_serie_a_code), leagueType)
+                getString(R.string.french_ligue_1) -> presenter.getTeamList(getString(R.string.french_ligue_1_code), leagueType)
+                getString(R.string.spanish_la_liga) -> presenter.getTeamList(getString(R.string.spanish_la_liga_code), leagueType)
+                else -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
             }
         }
     }
@@ -122,5 +124,9 @@ class LastMatchFragment : Fragment(), MatchView {
         events.clear()
         events.addAll(data)
         adapter.notifyDataSetChanged()
+    }
+
+    companion object {
+        fun newInstance(): LastMatchFragment = LastMatchFragment()
     }
 }

@@ -77,6 +77,7 @@ class EventUI : AnkoComponent<ViewGroup> {
                             textSize = 12f
                         }.lparams {
                             width = matchParent
+                            bottomMargin = dip(5)
                         }
 
                         linearLayout {

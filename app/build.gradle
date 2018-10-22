@@ -10,13 +10,11 @@ android {
         applicationId "com.example.rizkyekoputra.footballmatchschedule"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "int", "TAB_COUNT", "2"
         buildConfigField "String", "BASE_URL", "\"https://www.thesportsdb.com/\""
         buildConfigField "String", "TSDB_API_KEY", "\"1\""
-        buildConfigField "String", "LEAGE_ID", "\"4328\""
     }
     buildTypes {
         release {
@@ -49,10 +47,8 @@ dependencies {
     // RecyclerView-v7
     implementation "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
     implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
-
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.google.code.gson:gson:2.8.5'
-
     implementation "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.squareup.picasso:picasso:$picaso_version"
 }
