@@ -8,6 +8,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.rizkyekoputra.footballmatchschedule.Utils.DateHelper
+import com.example.rizkyekoputra.footballmatchschedule.Utils.StringHelper
+import com.example.rizkyekoputra.footballmatchschedule.model.Event
+import com.example.rizkyekoputra.footballmatchschedule.model.Team
+import com.example.rizkyekoputra.footballmatchschedule.presenter.DetailPresenter
+import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
@@ -34,8 +40,8 @@ class DetailActivity : AppCompatActivity(), DetailView {
     lateinit var awayMidfieldTv: TextView
     lateinit var homeForwardTv: TextView
     lateinit var awayForwardTv: TextView
-    lateinit var homeSubtitutesTv: TextView
-    lateinit var awaySubtitutesTv: TextView
+    lateinit var homeSubstitutesTv: TextView
+    lateinit var awaySubstitutesTv: TextView
 
     override fun displayHomeTeamBadge(team: Team) {
         Picasso.get()
@@ -77,8 +83,8 @@ class DetailActivity : AppCompatActivity(), DetailView {
         awayScoreTv.text = event.awayScore.let { it?.toString() ?: "" }
         homeGoalsTv.text = event.homeGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
         awayGoalsTv.text = event.awayGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeShotsTv.text = event.homeShots.toString()
-        awayShotsTv.text = event.awayShots.toString()
+        homeShotsTv.text = event.homeShots.let { it?.toString() ?: "" }
+        awayShotsTv.text = event.awayShots.let { it?.toString() ?: "" }
         homeGoalKeeperTv.text = event.homeLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
         awayGoalKeeperTv.text = event.awayLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
         homeDefenseTv.text = event.homeLineupDefense?.let { StringHelper.replaceColonWithNewLine(it) }
@@ -87,8 +93,8 @@ class DetailActivity : AppCompatActivity(), DetailView {
         awayMidfieldTv.text = event.awayLineupMidfield?.let { StringHelper.replaceColonWithNewLine(it) }
         homeForwardTv.text = event.homeLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
         awayForwardTv.text = event.awayLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeSubtitutesTv.text = event.homeLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
-        awaySubtitutesTv.text = event.awayLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeSubstitutesTv.text = event.homeLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
+        awaySubstitutesTv.text = event.awayLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
     }
 }
 
@@ -483,7 +489,7 @@ class DetailActivityUI : AnkoComponent<DetailActivity> {
                     linearLayout {
                         orientation = LinearLayout.VERTICAL
 
-                        owner.homeSubtitutesTv = textView {
+                        owner.homeSubstitutesTv = textView {
                             gravity = Gravity.LEFT
                         }.lparams(matchParent, wrapContent)
                     }.lparams(width = dip(0), height = wrapContent) {
@@ -507,7 +513,7 @@ class DetailActivityUI : AnkoComponent<DetailActivity> {
                     linearLayout {
                         orientation = LinearLayout.VERTICAL
 
-                        owner.awaySubtitutesTv = textView {
+                        owner.awaySubstitutesTv = textView {
                             gravity = Gravity.RIGHT
                         }.lparams(matchParent, wrapContent)
                     }.lparams(width = dip(0), height = wrapContent) {

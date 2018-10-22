@@ -1,4 +1,4 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.rest
 
 import java.net.URL
 

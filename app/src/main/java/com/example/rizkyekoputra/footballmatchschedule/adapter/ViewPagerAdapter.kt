@@ -1,8 +1,10 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.example.rizkyekoputra.footballmatchschedule.fragment.LastMatchFragment
+import com.example.rizkyekoputra.footballmatchschedule.fragment.NextMatchFragment
 
 class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

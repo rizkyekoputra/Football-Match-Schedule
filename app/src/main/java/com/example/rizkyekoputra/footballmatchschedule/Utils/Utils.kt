@@ -1,4 +1,4 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.Utils
 
 import android.view.View
 import java.text.SimpleDateFormat
@@ -20,6 +20,6 @@ object DateHelper {
 
 object StringHelper {
     fun replaceColonWithNewLine(string: String): String {
-        return string.replace(Regex("[;]\\s?"), "\n")
+        return string.replace(Regex("[;]\\s?"), "\n").trim()
     }
 }

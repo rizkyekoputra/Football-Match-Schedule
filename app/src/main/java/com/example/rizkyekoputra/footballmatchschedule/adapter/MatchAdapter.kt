@@ -1,4 +1,4 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.adapter
 
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
@@ -9,10 +9,14 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.rizkyekoputra.footballmatchschedule.Utils.DateHelper
+import com.example.rizkyekoputra.footballmatchschedule.DetailActivity
+import com.example.rizkyekoputra.footballmatchschedule.R
+import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
-class LastMatchAdapter(val events: List<Event>) : RecyclerView.Adapter<LastMatchAdapter.EventViewHolder>() {
+class MatchAdapter(val events: List<Event>) : RecyclerView.Adapter<MatchAdapter.EventViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         return EventViewHolder(EventUI().createView(AnkoContext.create(parent.context, parent)))

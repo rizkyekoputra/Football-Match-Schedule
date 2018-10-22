@@ -1,5 +1,9 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.presenter
 
+import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
+import com.example.rizkyekoputra.footballmatchschedule.DetailView
+import com.example.rizkyekoputra.footballmatchschedule.model.TeamResponse
+import com.example.rizkyekoputra.footballmatchschedule.rest.TheSportDBApi
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
