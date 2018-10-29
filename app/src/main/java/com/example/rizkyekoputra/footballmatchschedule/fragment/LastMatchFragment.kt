@@ -103,7 +103,7 @@ class LastMatchFragment : Fragment(), MatchView {
 
                         progressBar = progressBar {
                         }.lparams {
-                            centerHorizontally()
+                            centerInParent()
                         }
                     }
                 }
