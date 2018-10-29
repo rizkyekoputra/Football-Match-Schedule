@@ -1,6 +1,6 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
-import com.example.rizkyekoputra.footballmatchschedule.Favorite
+import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.EventResponse

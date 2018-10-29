@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import com.example.rizkyekoputra.footballmatchschedule.Favorite
+import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible

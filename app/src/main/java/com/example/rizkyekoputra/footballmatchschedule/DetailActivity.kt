@@ -25,6 +25,7 @@ import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
+import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
@@ -161,12 +162,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
         try {
             database.use {
                 insert(Favorite.TABLE_FAVORITE,
-                        Favorite.MATCH_ID to event.eventId,
-                        Favorite.MATCH_DATE to event.dateEvent?.let { DateHelper.formatDateToString(it) },
-                        Favorite.HOME_TEAM_NAME to event.homeTeamName,
-                        Favorite.AWAY_TEAM_NAME to event.awayTeamName,
-                        Favorite.HOME_SCORE to event.homeScore.let { it?.toString() ?: "" },
-                        Favorite.AWAY_SCORE to event.awayScore.let { it?.toString() ?: "" })
+                        Favorite.MATCH_ID to event.eventId)
             }
             snackbar(swipeRefresh, "Added to favorite").show()
         } catch (e: SQLiteConstraintException){
