@@ -20,6 +20,8 @@
 
     <string name="next_match">NEXT MATCH</string>
     <string name="last_match">LAST MATCH</string>
+    <string name="favorites">favorites</string>
+    <string name="matches">matches</string>
 
     <array name="league">
         <item>English Premier League</item>

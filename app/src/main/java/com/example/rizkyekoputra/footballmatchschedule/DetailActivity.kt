@@ -1,9 +1,12 @@
 package com.example.rizkyekoputra.footballmatchschedule
 
+import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -15,10 +18,14 @@ import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.Team
 import com.example.rizkyekoputra.footballmatchschedule.presenter.DetailPresenter
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
+import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
+import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.design.snackbar
 
 class DetailActivity : AppCompatActivity(), DetailView {
 
@@ -43,6 +50,12 @@ class DetailActivity : AppCompatActivity(), DetailView {
     lateinit var awayForwardTv: TextView
     lateinit var homeSubstitutesTv: TextView
     lateinit var awaySubstitutesTv: TextView
+
+    private lateinit var event: Event
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
 
     override fun displayHomeTeamBadge(team: Team) {
         Picasso.get()
@@ -69,7 +82,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
         val gson = Gson()
         mPresenter = DetailPresenter(this, request, gson)
 
-        val event = intent.getParcelableExtra<Event>("match")
+        event = intent.getParcelableExtra("match")
         mPresenter.getHomeTeamBadge(event.homeTeamId)
         mPresenter.getAwayTeamBadge(event.awayTeamId)
         initData(event)
@@ -98,15 +111,40 @@ class DetailActivity : AppCompatActivity(), DetailView {
         awaySubstitutesTv.text = event.awayLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(detail_menu, menu)
+        menuItem = menu
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
+            add_to_favorite -> {
+                addToFavorite()
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun addToFavorite(){
+        try {
+            database.use {
+                insert(Favorite.TABLE_FAVORITE,
+                        Favorite.MATCH_ID to event.eventId,
+                        Favorite.MATCH_NAME to event.eventName)
+            }
+            snackbar(swipeRefresh, "Added to favorite").show()
+        } catch (e: SQLiteConstraintException){
+            snackbar(swipeRefresh, e.localizedMessage).show()
+        }
+    }
+
 }
 
 class DetailActivityUI : AnkoComponent<DetailActivity> {
