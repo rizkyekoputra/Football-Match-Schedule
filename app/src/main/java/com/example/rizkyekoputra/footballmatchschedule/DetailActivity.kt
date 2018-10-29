@@ -20,6 +20,7 @@ import com.example.rizkyekoputra.footballmatchschedule.presenter.DetailPresenter
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
+import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*

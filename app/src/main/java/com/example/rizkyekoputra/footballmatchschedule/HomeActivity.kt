@@ -2,8 +2,10 @@ package com.example.rizkyekoputra.footballmatchschedule
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.rizkyekoputra.footballmatchschedule.R.string.favorites
-import com.example.rizkyekoputra.footballmatchschedule.R.string.matches
+import com.example.rizkyekoputra.footballmatchschedule.R.id.favorites
+import com.example.rizkyekoputra.footballmatchschedule.R.id.matches
+import com.example.rizkyekoputra.footballmatchschedule.fragment.FavoriteTeamsFragment
+import com.example.rizkyekoputra.footballmatchschedule.fragment.MatchesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -24,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
             true
         }
         bottom_navigation.selectedItemId = matches
+        supportActionBar?.elevation = 0F
     }
 
     private fun loadMatchesFragment(savedInstanceState: Bundle?) {
