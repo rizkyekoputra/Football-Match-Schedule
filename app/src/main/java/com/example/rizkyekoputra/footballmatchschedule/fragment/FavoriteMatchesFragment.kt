@@ -75,9 +75,8 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
     }
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui){
-        linearLayout {
+        verticalLayout {
             lparams(width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(R.color.colorAccent,
                         android.R.color.holo_green_light,

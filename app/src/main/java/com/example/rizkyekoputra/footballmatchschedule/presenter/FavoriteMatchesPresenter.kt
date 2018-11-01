@@ -17,7 +17,7 @@ class FavoriteMatchesPresenter(private val view: MatchView,
     fun getFavoriteEvent(favorites: List<Favorite>) {
         view.showLoading()
         doAsync {
-            var events: MutableList<Event> = mutableListOf()
+            val events: MutableList<Event> = mutableListOf()
             for (fav in favorites) {
                 val data = gson.fromJson(apiRepository
                         .doRequest(TheSportDBApi.getEventById(fav.matchId)),

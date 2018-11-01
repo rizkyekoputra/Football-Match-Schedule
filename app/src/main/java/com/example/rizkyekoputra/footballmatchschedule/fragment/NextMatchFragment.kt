@@ -84,9 +84,8 @@ class NextMatchFragment : Fragment(), MatchView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
-            linearLayout {
+            verticalLayout {
                 lparams(width = matchParent, height = wrapContent)
-                orientation = LinearLayout.VERTICAL
                 spinner = spinner()
                 swipeRefresh = swipeRefreshLayout {
                     setColorSchemeResources(R.color.colorAccent)
