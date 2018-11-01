@@ -14,8 +14,8 @@ import com.example.rizkyekoputra.footballmatchschedule.R.drawable.ic_added_to_fa
 import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.UI.DetailActivityUI
-import com.example.rizkyekoputra.footballmatchschedule.Utils.DateHelper
-import com.example.rizkyekoputra.footballmatchschedule.Utils.StringHelper
+import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
+import com.example.rizkyekoputra.footballmatchschedule.Utils.replaceColonWithNewLine
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
@@ -106,25 +106,25 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
     private fun initData(event: Event) {
-        matchDateTv.text = event.dateEvent?.let { DateHelper.formatDateToString(it) }
+        matchDateTv.text = event.dateEvent?.let { formatDateToString(it) }
         homeNameTv.text = event.homeTeamName
         homeScoreTv.text = event.homeScore.let { it?.toString() ?: "" }
         awayNameTv.text = event.awayTeamName
         awayScoreTv.text = event.awayScore.let { it?.toString() ?: "" }
-        homeGoalsTv.text = event.homeGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
-        awayGoalsTv.text = event.awayGoalDetails?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeGoalsTv.text = event.homeGoalDetails?.let { replaceColonWithNewLine(it) }
+        awayGoalsTv.text = event.awayGoalDetails?.let { replaceColonWithNewLine(it) }
         homeShotsTv.text = event.homeShots.let { it?.toString() ?: "" }
         awayShotsTv.text = event.awayShots.let { it?.toString() ?: "" }
-        homeGoalKeeperTv.text = event.homeLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
-        awayGoalKeeperTv.text = event.awayLineupGoalkeeper?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeDefenseTv.text = event.homeLineupDefense?.let { StringHelper.replaceColonWithNewLine(it) }
-        awayDefenseTv.text = event.awayLineupDefense?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeMidfieldTv.text = event.homeLineupMidfield?.let { StringHelper.replaceColonWithNewLine(it) }
-        awayMidfieldTv.text = event.awayLineupMidfield?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeForwardTv.text = event.homeLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
-        awayForwardTv.text = event.awayLineupForward?.let { StringHelper.replaceColonWithNewLine(it) }
-        homeSubstitutesTv.text = event.homeLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
-        awaySubstitutesTv.text = event.awayLineupSubstitutes?.let { StringHelper.replaceColonWithNewLine(it) }
+        homeGoalKeeperTv.text = event.homeLineupGoalkeeper?.let { replaceColonWithNewLine(it) }
+        awayGoalKeeperTv.text = event.awayLineupGoalkeeper?.let { replaceColonWithNewLine(it) }
+        homeDefenseTv.text = event.homeLineupDefense?.let { replaceColonWithNewLine(it) }
+        awayDefenseTv.text = event.awayLineupDefense?.let { replaceColonWithNewLine(it) }
+        homeMidfieldTv.text = event.homeLineupMidfield?.let { replaceColonWithNewLine(it) }
+        awayMidfieldTv.text = event.awayLineupMidfield?.let { replaceColonWithNewLine(it) }
+        homeForwardTv.text = event.homeLineupForward?.let { replaceColonWithNewLine(it) }
+        awayForwardTv.text = event.awayLineupForward?.let { replaceColonWithNewLine(it) }
+        homeSubstitutesTv.text = event.homeLineupSubstitutes?.let { replaceColonWithNewLine(it) }
+        awaySubstitutesTv.text = event.awayLineupSubstitutes?.let { replaceColonWithNewLine(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

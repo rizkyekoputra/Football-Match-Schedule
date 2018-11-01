@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.example.rizkyekoputra.footballmatchschedule.DetailActivity
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.UI.EventUI
-import com.example.rizkyekoputra.footballmatchschedule.Utils.DateHelper
+import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
@@ -34,7 +34,7 @@ class MatchAdapter(private val events: List<Event>) : RecyclerView.Adapter<Match
         private val tvAwayScore: TextView = itemView.find(R.id.away_score)
 
         fun bindItem(event: Event) {
-            tvMatchDate.text = event.dateEvent?.let { DateHelper.formatDateToString(it) }
+            tvMatchDate.text = event.dateEvent?.let { formatDateToString(it) }
             tvHomeTeamName.text = event.homeTeamName
             tvAwayTeamName.text = event.awayTeamName
             tvHomeScore.text = event.homeScore.let { it?.toString() ?: "" }

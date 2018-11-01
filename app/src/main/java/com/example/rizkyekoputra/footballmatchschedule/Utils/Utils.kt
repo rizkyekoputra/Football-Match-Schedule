@@ -12,14 +12,10 @@ fun View.invisible() {
     visibility = View.INVISIBLE
 }
 
-object DateHelper {
-    fun formatDateToString(date: Date): String {
-        return SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(date)
-    }
+fun formatDateToString(date: Date): String {
+    return SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(date)
 }
 
-object StringHelper {
-    fun replaceColonWithNewLine(string: String): String {
-        return string.replace(Regex("[;]\\s?"), "\n").trim()
-    }
+fun replaceColonWithNewLine(string: String): String {
+    return string.replace(Regex("[;]\\s?"), "\n").trim()
 }
