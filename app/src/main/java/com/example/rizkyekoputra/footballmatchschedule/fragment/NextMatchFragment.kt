@@ -54,14 +54,14 @@ class NextMatchFragment : Fragment(), MatchView {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
                 when (leagueName) {
-                    getString(R.string.uefa_champions_league) -> presenter.getTeamList(getString(R.string.uefa_champions_league_code), leagueType)
-                    getString(R.string.english_premier_league) -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
-                    getString(R.string.english_league_championship) -> presenter.getTeamList(getString(R.string.english_league_championship_code), leagueType)
-                    getString(R.string.german_bundesliga) -> presenter.getTeamList(getString(R.string.german_bundesliga_code), leagueType)
-                    getString(R.string.italian_serie_a) -> presenter.getTeamList(getString(R.string.italian_serie_a_code), leagueType)
-                    getString(R.string.french_ligue_1) -> presenter.getTeamList(getString(R.string.french_ligue_1_code), leagueType)
-                    getString(R.string.spanish_la_liga) -> presenter.getTeamList(getString(R.string.spanish_la_liga_code), leagueType)
-                    else -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
+                    getString(R.string.uefa_champions_league) -> presenter.getMatchList(getString(R.string.uefa_champions_league_code), leagueType)
+                    getString(R.string.english_premier_league) -> presenter.getMatchList(getString(R.string.english_premier_league_code), leagueType)
+                    getString(R.string.english_league_championship) -> presenter.getMatchList(getString(R.string.english_league_championship_code), leagueType)
+                    getString(R.string.german_bundesliga) -> presenter.getMatchList(getString(R.string.german_bundesliga_code), leagueType)
+                    getString(R.string.italian_serie_a) -> presenter.getMatchList(getString(R.string.italian_serie_a_code), leagueType)
+                    getString(R.string.french_ligue_1) -> presenter.getMatchList(getString(R.string.french_ligue_1_code), leagueType)
+                    getString(R.string.spanish_la_liga) -> presenter.getMatchList(getString(R.string.spanish_la_liga_code), leagueType)
+                    else -> presenter.getMatchList(getString(R.string.english_premier_league_code), leagueType)
                 }
             }
 
@@ -70,14 +70,14 @@ class NextMatchFragment : Fragment(), MatchView {
 
         swipeRefresh.onRefresh {
             when (leagueName) {
-                getString(R.string.uefa_champions_league) -> presenter.getTeamList(getString(R.string.uefa_champions_league_code), leagueType)
-                getString(R.string.english_premier_league) -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
-                getString(R.string.english_league_championship) -> presenter.getTeamList(getString(R.string.english_league_championship_code), leagueType)
-                getString(R.string.german_bundesliga) -> presenter.getTeamList(getString(R.string.german_bundesliga_code), leagueType)
-                getString(R.string.italian_serie_a) -> presenter.getTeamList(getString(R.string.italian_serie_a_code), leagueType)
-                getString(R.string.french_ligue_1) -> presenter.getTeamList(getString(R.string.french_ligue_1_code), leagueType)
-                getString(R.string.spanish_la_liga) -> presenter.getTeamList(getString(R.string.spanish_la_liga_code), leagueType)
-                else -> presenter.getTeamList(getString(R.string.english_premier_league_code), leagueType)
+                getString(R.string.uefa_champions_league) -> presenter.getMatchList(getString(R.string.uefa_champions_league_code), leagueType)
+                getString(R.string.english_premier_league) -> presenter.getMatchList(getString(R.string.english_premier_league_code), leagueType)
+                getString(R.string.english_league_championship) -> presenter.getMatchList(getString(R.string.english_league_championship_code), leagueType)
+                getString(R.string.german_bundesliga) -> presenter.getMatchList(getString(R.string.german_bundesliga_code), leagueType)
+                getString(R.string.italian_serie_a) -> presenter.getMatchList(getString(R.string.italian_serie_a_code), leagueType)
+                getString(R.string.french_ligue_1) -> presenter.getMatchList(getString(R.string.french_ligue_1_code), leagueType)
+                getString(R.string.spanish_la_liga) -> presenter.getMatchList(getString(R.string.spanish_la_liga_code), leagueType)
+                else -> presenter.getMatchList(getString(R.string.english_premier_league_code), leagueType)
             }
         }
     }

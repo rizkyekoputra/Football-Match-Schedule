@@ -29,6 +29,12 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -53,4 +59,10 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.squareup.picasso:picasso:$picaso_version"
+
+    testImplementation 'org.mockito:mockito-core:2.22.0'
+    testImplementation "org.mockito:mockito-inline:2.22.0"
+
+    testImplementation 'org.mockito:mockito-core:2.22.0'
+    testImplementation "org.mockito:mockito-inline:2.22.0"
 }
