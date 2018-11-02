@@ -7,4 +7,8 @@
     <item name="away_score" type="id" />
     <item name="bottom_layout" type="id" />
     <item name="main_container" type="id" />
+    <item name="list_event_last" type="id" />
+    <item name="list_event_next" type="id" />
+    <item name="spinner_last" type="id" />
+    <item name="spinner_next" type="id" />
 </resources>

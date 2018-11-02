@@ -1,6 +1,7 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
 import com.example.rizkyekoputra.footballmatchschedule.CoroutineContextProvider
+import com.example.rizkyekoputra.footballmatchschedule.IdlinkResource.EspressoIdlingResource
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.EventResponse
@@ -18,6 +19,7 @@ class FavoriteMatchesPresenter(private val view: MatchView,
 
     fun getFavoriteEvent(favorites: List<Favorite>) {
         view.showLoading()
+        EspressoIdlingResource.increment()
         async(context.main) {
             val events: MutableList<Event> = mutableListOf()
             for (fav in favorites) {
@@ -33,6 +35,7 @@ class FavoriteMatchesPresenter(private val view: MatchView,
 
             view.hideLoading()
             view.showTeamList(events)
+            EspressoIdlingResource.decrement()
         }
     }
 }

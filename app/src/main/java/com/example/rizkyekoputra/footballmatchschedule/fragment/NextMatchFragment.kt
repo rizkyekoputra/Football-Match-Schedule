@@ -86,7 +86,9 @@ class NextMatchFragment : Fragment(), MatchView {
         return UI {
             verticalLayout {
                 lparams(width = matchParent, height = wrapContent)
-                spinner = spinner()
+                spinner = spinner {
+                    id = R.id.spinner_next
+                }
                 swipeRefresh = swipeRefreshLayout {
                     setColorSchemeResources(R.color.colorAccent)
 
@@ -94,6 +96,7 @@ class NextMatchFragment : Fragment(), MatchView {
                         lparams(width = matchParent, height = wrapContent)
 
                         listEvent = recyclerView {
+                            id = R.id.list_event_next
                             lparams(width = matchParent, height = wrapContent)
 
                             layoutManager = LinearLayoutManager(ctx)

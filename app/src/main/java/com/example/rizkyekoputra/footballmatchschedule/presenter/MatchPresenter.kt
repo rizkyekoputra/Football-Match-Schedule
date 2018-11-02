@@ -1,6 +1,7 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
 import com.example.rizkyekoputra.footballmatchschedule.CoroutineContextProvider
+import com.example.rizkyekoputra.footballmatchschedule.IdlinkResource.EspressoIdlingResource
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.model.EventResponse
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
@@ -15,7 +16,9 @@ class MatchPresenter(private val view: MatchView,
                      private val context: CoroutineContextProvider = CoroutineContextProvider()) {
 
     fun getMatchList(league: String?, type: String?) {
+        EspressoIdlingResource.increment()
         view.showLoading()
+
         async(context.main) {
             val data = bg {
                 gson.fromJson(apiRepository
@@ -26,6 +29,7 @@ class MatchPresenter(private val view: MatchView,
 
             view.hideLoading()
             view.showTeamList(data.await().events)
+            EspressoIdlingResource.decrement()
         }
     }
 }
