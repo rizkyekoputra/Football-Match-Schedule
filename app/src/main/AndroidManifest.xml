@@ -19,8 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".MatchDetailActivity"
             android:parentActivityName=".HomeActivity" />
+        <activity android:name=".TeamDetailActivity"></activity>
     </application>
 
 </manifest>

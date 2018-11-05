@@ -5,7 +5,7 @@ import com.example.rizkyekoputra.footballmatchschedule.IdlinkResource.EspressoId
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.EventResponse
-import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
+import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteMatch
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.example.rizkyekoputra.footballmatchschedule.rest.TheSportDBApi
 import com.google.gson.Gson
@@ -17,12 +17,12 @@ class FavoriteMatchesPresenter(private val view: MatchView,
                                private val gson: Gson,
                                private val context: CoroutineContextProvider = CoroutineContextProvider()) {
 
-    fun getFavoriteEvent(favorites: List<Favorite>) {
+    fun getFavoriteEvent(favoriteMatches: List<FavoriteMatch>) {
         view.showLoading()
         EspressoIdlingResource.increment()
         async(context.main) {
             val events: MutableList<Event> = mutableListOf()
-            for (fav in favorites) {
+            for (fav in favoriteMatches) {
                 val data = bg {
                     gson.fromJson(apiRepository
                             .doRequest(TheSportDBApi.getEventById(fav.matchId)),

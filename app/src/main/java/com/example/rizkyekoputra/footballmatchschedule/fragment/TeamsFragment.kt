@@ -13,6 +13,7 @@ import android.widget.*
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.R.array.league
 import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
+import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
 import com.example.rizkyekoputra.footballmatchschedule.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
@@ -47,7 +48,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         spinner.adapter = spinnerAdapter
 
         adapter = TeamsAdapter(teams) {
-
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
         }
         listEvent.adapter = adapter
 

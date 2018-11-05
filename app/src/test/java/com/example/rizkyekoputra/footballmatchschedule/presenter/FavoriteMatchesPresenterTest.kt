@@ -37,7 +37,7 @@ class FavoriteMatchesPresenterTest {
     @Test
     fun getFavoriteEvent() {
         val events: MutableList<Event> = mutableListOf()
-        val favorites: MutableList<Favorite> = mutableListOf()
+        val favoriteMatches: MutableList<FavoriteMatch> = mutableListOf()
         val response = EventResponse(events)
         val id = "2235"
 
@@ -46,7 +46,7 @@ class FavoriteMatchesPresenterTest {
                 EventResponse::class.java
         )).thenReturn(response)
 
-        presenter.getFavoriteEvent(favorites)
+        presenter.getFavoriteEvent(favoriteMatches)
 
         verify(view).showLoading()
         verify(view).hideLoading()

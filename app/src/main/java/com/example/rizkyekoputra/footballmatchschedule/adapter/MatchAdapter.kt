@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.rizkyekoputra.footballmatchschedule.DetailActivity
+import com.example.rizkyekoputra.footballmatchschedule.MatchDetailActivity
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.UI.EventUI
 import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
@@ -41,7 +41,7 @@ class MatchAdapter(private val events: List<Event>) : RecyclerView.Adapter<Match
             tvAwayScore.text = event.awayScore.let { it?.toString() ?: "" }
 
             itemView.setOnClickListener {
-                itemView.context.startActivity<DetailActivity>("match" to event)
+                itemView.context.startActivity<MatchDetailActivity>("match" to event)
             }
         }
     }

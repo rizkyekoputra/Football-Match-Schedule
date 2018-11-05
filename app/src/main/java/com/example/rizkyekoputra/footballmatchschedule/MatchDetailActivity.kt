@@ -18,7 +18,7 @@ import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
 import com.example.rizkyekoputra.footballmatchschedule.Utils.replaceColonWithNewLine
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
-import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
+import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteMatch
 import com.example.rizkyekoputra.footballmatchschedule.model.Team
 import com.example.rizkyekoputra.footballmatchschedule.presenter.DetailPresenter
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
@@ -33,7 +33,7 @@ import org.jetbrains.anko.dip
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.support.v4.onRefresh
 
-class DetailActivity : AppCompatActivity(), DetailView {
+class MatchDetailActivity : AppCompatActivity(), DetailView {
 
     lateinit var matchDateTv: TextView
     lateinit var homeBadgeIv: ImageView
@@ -156,24 +156,24 @@ class DetailActivity : AppCompatActivity(), DetailView {
     private fun addToFavorite(){
         try {
             database.use {
-                insert(Favorite.TABLE_FAVORITE,
-                        Favorite.MATCH_ID to event.eventId)
+                insert(FavoriteMatch.TABLE_FAVORITE_MATCH,
+                        FavoriteMatch.MATCH_ID to event.eventId)
             }
-            snackbar(swipeRefresh, "Added to favorite").show()
+            swipeRefresh.snackbar("Added to favorite").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(swipeRefresh, e.localizedMessage).show()
+            swipeRefresh.snackbar(e.localizedMessage).show()
         }
     }
 
     private fun removeFromFavorite(){
         try {
             database.use {
-                delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
+                delete(FavoriteMatch.TABLE_FAVORITE_MATCH, "(MATCH_ID = {id})",
                         "id" to matchId)
             }
-            snackbar(swipeRefresh, "Removed to favorite").show()
+            swipeRefresh.snackbar("Removed to favorite").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(swipeRefresh, e.localizedMessage).show()
+            swipeRefresh.snackbar(e.localizedMessage).show()
         }
     }
 
@@ -186,10 +186,10 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
     private fun favoriteState(){
         database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(FavoriteMatch.TABLE_FAVORITE_MATCH)
                     .whereArgs("(MATCH_ID = {id})",
                             "id" to matchId)
-            val favorite = result.parseList(classParser<Favorite>())
+            val favorite = result.parseList(classParser<FavoriteMatch>())
             if (!favorite.isEmpty()) isFavorite = true
         }
     }

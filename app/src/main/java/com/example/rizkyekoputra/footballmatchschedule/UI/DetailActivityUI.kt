@@ -4,14 +4,14 @@ import android.graphics.Color
 import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import com.example.rizkyekoputra.footballmatchschedule.DetailActivity
+import com.example.rizkyekoputra.footballmatchschedule.MatchDetailActivity
 import com.example.rizkyekoputra.footballmatchschedule.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class DetailActivityUI : AnkoComponent<DetailActivity> {
-    override fun createView(ui: AnkoContext<DetailActivity>) = with(ui) {
+class DetailActivityUI : AnkoComponent<MatchDetailActivity> {
+    override fun createView(ui: AnkoContext<MatchDetailActivity>) = with(ui) {
         verticalLayout {
             lparams(width = matchParent, height = wrapContent)
             backgroundColor = Color.WHITE

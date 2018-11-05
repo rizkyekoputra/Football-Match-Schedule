@@ -9,9 +9,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.ProgressBar
-import com.example.rizkyekoputra.footballmatchschedule.model.Favorite
+import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteMatch
 import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
@@ -104,8 +103,8 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
     private fun showFavorite(){
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(Favorite.TABLE_FAVORITE)
-            val favorites = result.parseList(classParser<Favorite>())
+            val result = select(FavoriteMatch.TABLE_FAVORITE_MATCH)
+            val favorites = result.parseList(classParser<FavoriteMatch>())
             presenter.getFavoriteEvent(favorites)
         }
     }
