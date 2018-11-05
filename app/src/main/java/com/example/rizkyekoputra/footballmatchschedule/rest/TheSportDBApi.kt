@@ -14,4 +14,8 @@ object TheSportDBApi {
     fun getEventById(id: String?): String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.LOOKUP_EVENT_KEY}?id=" + id
     }
+
+    fun getTeamsByLeague(league: String?): String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.SEARCH_ALL_TEAMS}?l=" + league
+    }
 }

@@ -66,7 +66,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
     override fun displayHomeTeamBadge(team: Team) {
         Picasso.get()
-                .load(team.teamBadgeUrl)
+                .load(team.teamBadge)
                 .placeholder(R.drawable.default_placeholder)
                 .resize(dip(90), dip(90))
                 .into(homeBadgeIv)
@@ -74,7 +74,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
     override fun displayAwayTeamBadge(team: Team) {
         Picasso.get()
-                .load(team.teamBadgeUrl)
+                .load(team.teamBadge)
                 .placeholder(R.drawable.default_placeholder)
                 .into(awayBadgeIv)
     }

@@ -9,6 +9,10 @@
     <item name="main_container" type="id" />
     <item name="list_event_last" type="id" />
     <item name="list_event_next" type="id" />
+    <item name="list_team" type="id" />
     <item name="spinner_last" type="id" />
     <item name="spinner_next" type="id" />
+    <item name="spinner_teams" type="id" />
+    <item name="team_badge" type="id" />
+    <item name="team_name" type="id" />
 </resources>

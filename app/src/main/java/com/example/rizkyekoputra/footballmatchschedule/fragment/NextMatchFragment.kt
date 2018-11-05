@@ -120,7 +120,7 @@ class NextMatchFragment : Fragment(), MatchView {
         progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<Event>) {
+    override fun showMatchList(data: List<Event>) {
         swipeRefresh.isRefreshing = false
         events.clear()
         events.addAll(data)

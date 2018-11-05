@@ -34,7 +34,7 @@ class FavoriteMatchesPresenter(private val view: MatchView,
             }
 
             view.hideLoading()
-            view.showTeamList(events)
+            view.showMatchList(events)
             EspressoIdlingResource.decrement()
         }
     }

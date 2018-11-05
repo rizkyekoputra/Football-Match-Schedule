@@ -50,7 +50,7 @@ class MatchPresenterTest {
         presenter.getMatchList(league, type)
 
         verify(view).showLoading()
-        verify(view).showTeamList(events)
+        verify(view).showMatchList(events)
         verify(view).hideLoading()
     }
 }

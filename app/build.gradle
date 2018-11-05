@@ -17,6 +17,8 @@ android {
         buildConfigField "String", "TSDB_API_KEY", "\"1\""
         buildConfigField "String", "LOOKUP_TEAM_KEY", "\"lookupteam.php\""
         buildConfigField "String", "LOOKUP_EVENT_KEY", "\"lookupevent.php\""
+        buildConfigField "String", "SEARCH_ALL_TEAMS", "\"search_all_teams.php\""
+
     }
     buildTypes {
         release {

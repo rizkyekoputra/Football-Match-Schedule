@@ -50,6 +50,6 @@ class FavoriteMatchesPresenterTest {
 
         verify(view).showLoading()
         verify(view).hideLoading()
-        verify(view).showTeamList(events)
+        verify(view).showMatchList(events)
     }
 }

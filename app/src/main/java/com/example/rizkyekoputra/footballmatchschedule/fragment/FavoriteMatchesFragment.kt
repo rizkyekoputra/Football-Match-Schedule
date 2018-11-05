@@ -46,7 +46,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
         progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<Event>) {
+    override fun showMatchList(data: List<Event>) {
         swipeRefresh.isRefreshing = false
         favorites.clear()
         favorites.addAll(data)
