@@ -11,6 +11,7 @@ import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivity
 
 class MatchAdapter(private val events: List<Event>) : RecyclerView.Adapter<MatchAdapter.EventViewHolder>() {
@@ -40,7 +41,7 @@ class MatchAdapter(private val events: List<Event>) : RecyclerView.Adapter<Match
             tvHomeScore.text = event.homeScore.let { it?.toString() ?: "" }
             tvAwayScore.text = event.awayScore.let { it?.toString() ?: "" }
 
-            itemView.setOnClickListener {
+            itemView.onClick {
                 itemView.context.startActivity<MatchDetailActivity>("match" to event)
             }
         }

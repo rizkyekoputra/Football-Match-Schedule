@@ -7,24 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
-import kotlinx.android.synthetic.main.macthes_fragment.*
+import kotlinx.android.synthetic.main.favorites_fragment.*
 
-class MatchesFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.macthes_fragment, container, false)
+        return inflater.inflate(R.layout.favorites_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         val fragmentAdapter = ViewPagerAdapter(childFragmentManager).apply {
-            populateFragment(NextMatchFragment.newInstance(), getString(R.string.next_match))
-            populateFragment(LastMatchFragment.newInstance(), getString(R.string.last_match))
+            populateFragment(FavoriteMatchesFragment.newInstance(), getString(R.string.matches))
+            populateFragment(FavoriteTeamsFragment.newInstance(), getString(R.string.favorites))
         }
-        viewpager_main.adapter = fragmentAdapter
+        viewpager_favorite.adapter = fragmentAdapter
 
-        tabs_main.setupWithViewPager(viewpager_main)
+        tabs_favorite.setupWithViewPager(viewpager_favorite)
     }
 }

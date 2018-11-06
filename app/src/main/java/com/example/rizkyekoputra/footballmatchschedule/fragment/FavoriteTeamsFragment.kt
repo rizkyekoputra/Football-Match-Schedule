@@ -10,15 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import com.example.rizkyekoputra.footballmatchschedule.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.R
+import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
+import com.example.rizkyekoputra.footballmatchschedule.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
-import com.example.rizkyekoputra.footballmatchschedule.adapter.MatchAdapter
+import com.example.rizkyekoputra.footballmatchschedule.adapter.TeamsAdapter
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
-import com.example.rizkyekoputra.footballmatchschedule.model.Event
-import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteMatch
-import com.example.rizkyekoputra.footballmatchschedule.presenter.FavoriteMatchesPresenter
+import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteTeam
+import com.example.rizkyekoputra.footballmatchschedule.model.Team
+import com.example.rizkyekoputra.footballmatchschedule.presenter.FavoriteTeamsPresenter
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.google.gson.Gson
 import org.jetbrains.anko.*
@@ -29,11 +30,11 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
-    private var favorites: MutableList<Event> = mutableListOf()
-    private lateinit var adapter: MatchAdapter
-    private lateinit var presenter: FavoriteMatchesPresenter
-    private lateinit var listEvent: RecyclerView
+class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
+    private var teams: MutableList<Team> = mutableListOf()
+    private lateinit var adapter: TeamsAdapter
+    private lateinit var presenter: FavoriteTeamsPresenter
+    private lateinit var listTeam: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
 
@@ -45,23 +46,25 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
         progressBar.invisible()
     }
 
-    override fun showMatchList(data: List<Event>) {
+    override fun showTeamList(data: List<Team>) {
         swipeRefresh.isRefreshing = false
-        favorites.clear()
-        favorites.addAll(data)
+        teams.clear()
+        teams.addAll(data)
         adapter.notifyDataSetChanged()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = MatchAdapter(favorites)
+        adapter = TeamsAdapter(teams) {
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+        }
 
-        listEvent.adapter = adapter
+        listTeam.adapter = adapter
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = FavoriteMatchesPresenter(this, request, gson)
+        presenter = FavoriteTeamsPresenter(this, request, gson)
 
         showFavorite()
         swipeRefresh.onRefresh {
@@ -85,7 +88,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
                 relativeLayout {
                     lparams(width = matchParent, height = wrapContent)
 
-                    listEvent = recyclerView {
+                    listTeam = recyclerView {
                         lparams(width = matchParent, height = wrapContent)
 
                         layoutManager = LinearLayoutManager(ctx)
@@ -103,13 +106,13 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context>, MatchView {
     private fun showFavorite(){
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(FavoriteMatch.TABLE_FAVORITE_MATCH)
-            val favorites = result.parseList(classParser<FavoriteMatch>())
-            presenter.getFavoriteEvent(favorites)
+            val result = select(FavoriteTeam.TABLE_FAVORITE_TEAM)
+            val favorites = result.parseList(classParser<FavoriteTeam>())
+            presenter.getFavoriteTeam(favorites)
         }
     }
 
     companion object {
-        fun newInstance(): FavoriteMatchesFragment = FavoriteMatchesFragment()
+        fun newInstance(): FavoriteTeamsFragment = FavoriteTeamsFragment()
     }
 }

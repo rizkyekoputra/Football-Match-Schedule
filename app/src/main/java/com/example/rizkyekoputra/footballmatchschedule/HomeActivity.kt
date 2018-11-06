@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.rizkyekoputra.footballmatchschedule.R.id.*
 import com.example.rizkyekoputra.footballmatchschedule.fragment.FavoriteMatchesFragment
+import com.example.rizkyekoputra.footballmatchschedule.fragment.FavoritesFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.MatchesFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
@@ -54,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
+                    .replace(R.id.main_container, FavoritesFragment(), FavoritesFragment::class.java.simpleName)
                     .commit()
         }
     }
