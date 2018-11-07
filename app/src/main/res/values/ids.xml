@@ -15,4 +15,6 @@
     <item name="spinner_teams" type="id" />
     <item name="team_badge" type="id" />
     <item name="team_name" type="id" />
+    <item name="match_time" type="id" />
+    <item name="notif" type="id" />
 </resources>

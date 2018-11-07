@@ -11,7 +11,7 @@ class UtilsKtTest {
     fun formatDateToString() {
         val dateFormat = SimpleDateFormat("MM/dd/yyyy")
         val date = dateFormat.parse("02/28/2018")
-        assertEquals("Wednesday, 28 February 2018", formatDateToString(date))
+        assertEquals("Wed, 28 Feb 2018", formatDateToString(date))
     }
 
     @Test

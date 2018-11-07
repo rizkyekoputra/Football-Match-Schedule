@@ -1,6 +1,7 @@
 package com.example.rizkyekoputra.footballmatchschedule.Utils
 
 import android.view.View
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,7 +14,13 @@ fun View.invisible() {
 }
 
 fun formatDateToString(date: Date): String {
-    return SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(date)
+    return SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault()).format(date)
+}
+
+fun formatTimeToString(time: String): String {
+    val formatter = SimpleDateFormat("HH:mm:ssXXX", Locale.getDefault())
+    val time = Time(formatter.parse(time).time).toString().split(':')
+    return "${time[0]}:${time[1]}"
 }
 
 fun replaceColonWithNewLine(string: String): String {

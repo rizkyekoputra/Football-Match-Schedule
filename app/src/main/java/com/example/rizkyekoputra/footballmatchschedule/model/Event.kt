@@ -100,6 +100,9 @@ data class Event(
         @SerializedName("strDate")
         var dateDisplay: String? = null,
 
+        @SerializedName("strTime")
+        var timeDisplay: String? = null,
+
         @SerializedName("idHomeTeam")
         var homeTeamId: String? = null,
 

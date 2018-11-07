@@ -29,11 +29,29 @@ class EventUI : AnkoComponent<ViewGroup> {
                     layoutParams = RelativeLayout.LayoutParams(matchParent, wrapContent)
                     padding = dip(10)
 
+                    imageView {
+                        id = R.id.notif
+                        setImageResource(R.drawable.notif)
+                    }.lparams(width = dip(24), height = dip(24)) {
+                        gravity = Gravity.RIGHT
+                        alignParentEnd()
+                    }
+
                     verticalLayout {
                         textView {
                             id = R.id.match_date
                             gravity = Gravity.CENTER
-                            textSize = 12f
+                            textSize = 13f
+                        }.lparams {
+                            width = matchParent
+                            bottomMargin = dip(5)
+                            topMargin = dip(10)
+                        }
+
+                        textView {
+                            id = R.id.match_time
+                            gravity = Gravity.CENTER
+                            textSize = 13f
                         }.lparams {
                             width = matchParent
                             bottomMargin = dip(5)
