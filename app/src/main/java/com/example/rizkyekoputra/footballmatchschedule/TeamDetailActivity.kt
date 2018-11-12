@@ -1,26 +1,20 @@
 package com.example.rizkyekoputra.footballmatchschedule
 
 import android.database.sqlite.SQLiteConstraintException
-import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
-import com.example.rizkyekoputra.footballmatchschedule.R.color.colorPrimaryText
 import com.example.rizkyekoputra.footballmatchschedule.R.drawable.ic_add_to_favorites
 import com.example.rizkyekoputra.footballmatchschedule.R.drawable.ic_added_to_favorites
 import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
+import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
+import com.example.rizkyekoputra.footballmatchschedule.fragment.TeamOverviewFragment
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteTeam
 import com.example.rizkyekoputra.footballmatchschedule.model.Team
@@ -28,92 +22,31 @@ import com.example.rizkyekoputra.footballmatchschedule.presenter.TeamDetailPrese
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.*
+import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var presenter: TeamDetailPresenter
     private lateinit var teams: Team
-    private lateinit var progressBar: ProgressBar
-    private lateinit var swipeRefresh: SwipeRefreshLayout
-
-    private lateinit var teamBadge: ImageView
-    private lateinit var teamName: TextView
-    private lateinit var teamFormedYear: TextView
-    private lateinit var teamStadium: TextView
-    private lateinit var teamDescription: TextView
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
     private lateinit var teamId: String
+    private lateinit var teamDescription: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_team_detail)
 
         val intent = intent
         teamId = intent.getStringExtra("id")
-        supportActionBar?.title = "Team Detail"
+        teamDescription = intent.getStringExtra("description")
+        supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        linearLayout {
-            lparams(width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
-            backgroundColor = Color.WHITE
-
-            swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(colorAccent,
-                        android.R.color.holo_green_light,
-                        android.R.color.holo_orange_light,
-                        android.R.color.holo_red_light)
-
-                scrollView {
-                    isVerticalScrollBarEnabled = false
-                    relativeLayout {
-                        lparams(width = matchParent, height = wrapContent)
-
-                        linearLayout{
-                            lparams(width = matchParent, height = wrapContent)
-                            padding = dip(10)
-                            orientation = LinearLayout.VERTICAL
-                            gravity = Gravity.CENTER_HORIZONTAL
-
-                            teamBadge =  imageView {}.lparams(height = dip(75))
-
-                            teamName = textView{
-                                this.gravity = Gravity.CENTER
-                                textSize = 20f
-                                textColor = ContextCompat.getColor(context, colorAccent)
-                            }.lparams{
-                                topMargin = dip(5)
-                            }
-
-                            teamFormedYear = textView{
-                                this.gravity = Gravity.CENTER
-                            }
-
-                            teamStadium = textView{
-                                this.gravity = Gravity.CENTER
-                                textColor = ContextCompat.getColor(context, colorPrimaryText)
-                            }
-
-                            teamDescription = textView().lparams{
-                                topMargin = dip(20)
-                            }
-                        }
-                        progressBar = progressBar {
-                        }.lparams {
-                            centerHorizontally()
-                        }
-                    }
-                }
-            }
-        }
+        supportActionBar?.elevation = 0F
 
         favoriteState()
         val request = ApiRepository()
@@ -121,9 +54,17 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         presenter = TeamDetailPresenter(this, request, gson)
         presenter.getTeamDetail(teamId)
 
-        swipeRefresh.onRefresh {
-            presenter.getTeamDetail(teamId)
+        val bundle = Bundle()
+        bundle.putCharSequence("description", teamDescription)
+
+        val fragmentAdapter = ViewPagerAdapter(supportFragmentManager).apply {
+            populateFragment(TeamOverviewFragment().apply { arguments = bundle }, getString(R.string.overview))
+            populateFragment(TeamOverviewFragment().apply { arguments = bundle }, getString(R.string.player))
         }
+        viewpager_team_detail.adapter = fragmentAdapter
+
+        tabs_team_detail.setupWithViewPager(viewpager_team_detail)
+
     }
 
     private fun favoriteState(){
@@ -137,24 +78,21 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     }
 
     override fun showLoading() {
-        progressBar.visible()
+        progress_bar.visible()
     }
 
     override fun hideLoading() {
-        progressBar.invisible()
+        progress_bar.invisible()
     }
 
     override fun showTeamDetail(data: List<Team>) {
         teams = Team(data[0].teamId,
                 data[0].teamName,
                 data[0].teamBadge)
-        swipeRefresh.isRefreshing = false
-        Picasso.get().load(data[0].teamBadge).into(teamBadge)
-        teamName.text = data[0].teamName
-        teamDescription.text = data[0].teamDescription
-        teamFormedYear.text = data[0].teamFormedYear
-        teamStadium.text = data[0].teamStadium
-
+        Picasso.get().load(data[0].teamBadge).into(team_detail_image)
+        team_detail_name.text = data[0].teamName
+        team_detail_year.text = data[0].teamFormedYear
+        team_detail_stadium.text = data[0].teamStadium
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -189,9 +127,9 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                 insert(FavoriteTeam.TABLE_FAVORITE_TEAM,
                         FavoriteTeam.TEAM_ID to teams.teamId)
             }
-            swipeRefresh.snackbar("Added to favorite").show()
+            Snackbar.make(tabs_team_detail, "Added to favorite", Snackbar.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException){
-            swipeRefresh.snackbar(e.localizedMessage).show()
+            Snackbar.make(tabs_team_detail, e.localizedMessage, Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -201,9 +139,9 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                 delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {teamId})",
                         "teamId" to teamId)
             }
-            swipeRefresh.snackbar("Removed to favorite").show()
+            Snackbar.make(tabs_team_detail, "Removed to favorite", Snackbar.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException){
-            swipeRefresh.snackbar(e.localizedMessage).show()
+            Snackbar.make(tabs_team_detail, e.localizedMessage, Snackbar.LENGTH_SHORT).show()
         }
     }
 

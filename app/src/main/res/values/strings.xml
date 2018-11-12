@@ -18,11 +18,13 @@
     <string name="french_ligue_1_code">4334</string>
     <string name="spanish_la_liga_code">4335</string>
 
-    <string name="next_match">NEXT MATCH</string>
-    <string name="last_match">LAST MATCH</string>
+    <string name="next_match">NEXT</string>
+    <string name="last_match">PAST</string>
     <string name="favorites">Favorites</string>
     <string name="matches">Matches</string>
     <string name="teams">Teams</string>
+    <string name="overview">OVERVIEW</string>
+    <string name="player">PLAYERS</string>
 
     <array name="league">
         <item>English Premier League</item>

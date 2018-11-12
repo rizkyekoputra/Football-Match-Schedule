@@ -57,7 +57,7 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         super.onActivityCreated(savedInstanceState)
 
         adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "description" to "${it.teamDescription}")
         }
 
         listTeam.adapter = adapter

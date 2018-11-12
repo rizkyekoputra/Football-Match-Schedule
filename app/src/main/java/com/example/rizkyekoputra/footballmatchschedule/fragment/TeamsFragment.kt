@@ -48,7 +48,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         spinner.adapter = spinnerAdapter
 
         adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "description" to "${it.teamDescription}")
         }
         listEvent.adapter = adapter
 
