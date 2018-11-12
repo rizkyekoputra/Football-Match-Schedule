@@ -18,4 +18,8 @@ object TheSportDBApi {
     fun getTeamsByLeague(league: String?): String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.SEARCH_ALL_TEAMS}?l=" + league
     }
+
+    fun getPlayersByTeamId(teamId: String?): String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.LOOKUP_ALL_PLAYERS}?id=" + teamId
+    }
 }

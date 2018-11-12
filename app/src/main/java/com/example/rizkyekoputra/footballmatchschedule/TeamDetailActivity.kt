@@ -14,6 +14,7 @@ import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
 import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
+import com.example.rizkyekoputra.footballmatchschedule.fragment.PlayersFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.TeamOverviewFragment
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteTeam
@@ -55,11 +56,12 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         presenter.getTeamDetail(teamId)
 
         val bundle = Bundle()
+        bundle.putCharSequence("id", teamId)
         bundle.putCharSequence("description", teamDescription)
 
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager).apply {
             populateFragment(TeamOverviewFragment().apply { arguments = bundle }, getString(R.string.overview))
-            populateFragment(TeamOverviewFragment().apply { arguments = bundle }, getString(R.string.player))
+            populateFragment(PlayersFragment().apply { arguments = bundle }, getString(R.string.player))
         }
         viewpager_team_detail.adapter = fragmentAdapter
 
@@ -139,7 +141,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                 delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {teamId})",
                         "teamId" to teamId)
             }
-            Snackbar.make(tabs_team_detail, "Removed to favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(tabs_team_detail, "Removed from favorite", Snackbar.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException){
             Snackbar.make(tabs_team_detail, e.localizedMessage, Snackbar.LENGTH_SHORT).show()
         }

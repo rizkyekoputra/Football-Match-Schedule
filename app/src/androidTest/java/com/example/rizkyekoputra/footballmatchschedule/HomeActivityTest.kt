@@ -92,7 +92,7 @@ class HomeActivityTest {
 
         onView(ViewMatchers.withId(add_to_favorite)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(ViewMatchers.withId(add_to_favorite)).perform(ViewActions.click())
-        onView(ViewMatchers.withText("Removed to favorite")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withText("Removed from favorite")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.pressBack()
 
         onView(ViewMatchers.withId(bottom_navigation)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))

@@ -17,4 +17,8 @@
     <item name="team_name" type="id" />
     <item name="match_time" type="id" />
     <item name="notif" type="id" />
+    <item name="list_player" type="id" />
+    <item name="player_thumb" type="id" />
+    <item name="player_name" type="id" />
+    <item name="player_position" type="id" />
 </resources>

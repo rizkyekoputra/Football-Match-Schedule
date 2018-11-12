@@ -171,7 +171,7 @@ class MatchDetailActivity : AppCompatActivity(), DetailView {
                 delete(FavoriteMatch.TABLE_FAVORITE_MATCH, "(MATCH_ID = {id})",
                         "id" to matchId)
             }
-            swipeRefresh.snackbar("Removed to favorite").show()
+            swipeRefresh.snackbar("Removed from favorite").show()
         } catch (e: SQLiteConstraintException){
             swipeRefresh.snackbar(e.localizedMessage).show()
         }

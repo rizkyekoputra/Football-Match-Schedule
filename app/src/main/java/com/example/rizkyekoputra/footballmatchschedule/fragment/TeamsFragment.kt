@@ -122,5 +122,4 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         teams.addAll(data)
         adapter.notifyDataSetChanged()
     }
-
 }
