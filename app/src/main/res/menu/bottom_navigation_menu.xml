@@ -5,7 +5,7 @@
         android:id="@+id/matches"
         android:enabled="true"
         android:title="@string/matches"
-        android:icon="@drawable/ic_matches"
+        android:icon="@drawable/trophy"
         app:showAsAction="ifRoom"/>
 
     <item

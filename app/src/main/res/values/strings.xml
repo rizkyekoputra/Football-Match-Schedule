@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Football Match Schedule</string>
+    <string name="app_name">Football Apps</string>
     <string name="match_detail">Match Detail</string>
 
     <string name="uefa_champions_league">UEFA Champions League</string>
@@ -20,9 +20,9 @@
 
     <string name="next_match">NEXT MATCH</string>
     <string name="last_match">LAST MATCH</string>
-    <string name="favorites">favorites</string>
-    <string name="matches">matches</string>
-    <string name="teams">teams</string>
+    <string name="favorites">Favorites</string>
+    <string name="matches">Matches</string>
+    <string name="teams">Teams</string>
 
     <array name="league">
         <item>English Premier League</item>
