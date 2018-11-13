@@ -1,4 +1,4 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.Utils
 
 import kotlinx.coroutines.experimental.android.UI
 import kotlin.coroutines.experimental.CoroutineContext

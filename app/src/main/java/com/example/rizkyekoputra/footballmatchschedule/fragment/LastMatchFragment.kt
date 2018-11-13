@@ -14,6 +14,7 @@ import com.example.rizkyekoputra.footballmatchschedule.presenter.MatchPresenter
 import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
+import com.example.rizkyekoputra.footballmatchschedule.View.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.adapter.MatchAdapter
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository

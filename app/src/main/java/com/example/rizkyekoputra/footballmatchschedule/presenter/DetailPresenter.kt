@@ -1,7 +1,7 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
-import com.example.rizkyekoputra.footballmatchschedule.CoroutineContextProvider
-import com.example.rizkyekoputra.footballmatchschedule.DetailView
+import com.example.rizkyekoputra.footballmatchschedule.Utils.CoroutineContextProvider
+import com.example.rizkyekoputra.footballmatchschedule.View.DetailView
 import com.example.rizkyekoputra.footballmatchschedule.IdlinkResource.EspressoIdlingResource
 import com.example.rizkyekoputra.footballmatchschedule.model.TeamResponse
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository

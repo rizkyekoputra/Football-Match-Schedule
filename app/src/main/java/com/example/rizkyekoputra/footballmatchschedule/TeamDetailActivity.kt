@@ -13,6 +13,7 @@ import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
+import com.example.rizkyekoputra.footballmatchschedule.View.TeamDetailView
 import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
 import com.example.rizkyekoputra.footballmatchschedule.fragment.PlayersFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.TeamOverviewFragment
@@ -23,6 +24,7 @@ import com.example.rizkyekoputra.footballmatchschedule.presenter.TeamDetailPrese
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -37,17 +39,23 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private var isFavorite: Boolean = false
     private lateinit var teamId: String
     private lateinit var teamDescription: String
+    private lateinit var teamName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_detail)
+        setSupportActionBar(toolbar)
 
         val intent = intent
         teamId = intent.getStringExtra("id")
         teamDescription = intent.getStringExtra("description")
-        supportActionBar?.title = ""
+        teamName = intent.getStringExtra("name")
+        supportActionBar?.title = teamName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0F
+
+        collapsing_toolbar?.setExpandedTitleColor(ContextCompat.getColor(this, android.R.color.transparent))
+        collapsing_toolbar?.setCollapsedTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
 
         favoriteState()
         val request = ApiRepository()

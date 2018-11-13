@@ -1,6 +1,6 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
-import com.example.rizkyekoputra.footballmatchschedule.MatchView
+import com.example.rizkyekoputra.footballmatchschedule.View.MatchView
 import com.example.rizkyekoputra.footballmatchschedule.TestContextProvider
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.EventResponse

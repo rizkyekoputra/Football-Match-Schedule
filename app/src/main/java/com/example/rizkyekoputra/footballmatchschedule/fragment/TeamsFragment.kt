@@ -14,7 +14,7 @@ import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.R.array.league
 import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
 import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
-import com.example.rizkyekoputra.footballmatchschedule.TeamsView
+import com.example.rizkyekoputra.footballmatchschedule.View.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
 import com.example.rizkyekoputra.footballmatchschedule.adapter.TeamsAdapter
@@ -48,7 +48,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         spinner.adapter = spinnerAdapter
 
         adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "description" to "${it.teamDescription}")
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "name" to "${it.teamName}", "description" to "${it.teamDescription}")
         }
         listEvent.adapter = adapter
 

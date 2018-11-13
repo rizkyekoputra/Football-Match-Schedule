@@ -1,8 +1,8 @@
 package com.example.rizkyekoputra.footballmatchschedule.presenter
 
-import com.example.rizkyekoputra.footballmatchschedule.CoroutineContextProvider
+import com.example.rizkyekoputra.footballmatchschedule.Utils.CoroutineContextProvider
 import com.example.rizkyekoputra.footballmatchschedule.IdlinkResource.EspressoIdlingResource
-import com.example.rizkyekoputra.footballmatchschedule.PlayerView
+import com.example.rizkyekoputra.footballmatchschedule.View.PlayerView
 import com.example.rizkyekoputra.footballmatchschedule.model.PlayerResponse
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.example.rizkyekoputra.footballmatchschedule.rest.TheSportDBApi

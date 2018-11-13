@@ -11,9 +11,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.example.rizkyekoputra.footballmatchschedule.PlayerDetailActivity
-import com.example.rizkyekoputra.footballmatchschedule.PlayerView
+import com.example.rizkyekoputra.footballmatchschedule.View.PlayerView
 import com.example.rizkyekoputra.footballmatchschedule.R
-import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
 import com.example.rizkyekoputra.footballmatchschedule.adapter.PlayerAdapter

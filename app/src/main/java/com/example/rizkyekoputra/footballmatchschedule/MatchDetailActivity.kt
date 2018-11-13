@@ -16,6 +16,7 @@ import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.UI.DetailActivityUI
 import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
 import com.example.rizkyekoputra.footballmatchschedule.Utils.replaceColonWithNewLine
+import com.example.rizkyekoputra.footballmatchschedule.View.DetailView
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
 import com.example.rizkyekoputra.footballmatchschedule.model.Event
 import com.example.rizkyekoputra.footballmatchschedule.model.FavoriteMatch

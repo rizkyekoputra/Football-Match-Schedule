@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
-import com.example.rizkyekoputra.footballmatchschedule.TeamsView
+import com.example.rizkyekoputra.footballmatchschedule.View.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
 import com.example.rizkyekoputra.footballmatchschedule.adapter.TeamsAdapter
@@ -57,7 +57,7 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         super.onActivityCreated(savedInstanceState)
 
         adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "description" to "${it.teamDescription}")
+            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "name" to "${it.teamName}", "description" to "${it.teamDescription}")
         }
 
         listTeam.adapter = adapter

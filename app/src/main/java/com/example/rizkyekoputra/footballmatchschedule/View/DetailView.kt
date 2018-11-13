@@ -1,4 +1,4 @@
-package com.example.rizkyekoputra.footballmatchschedule
+package com.example.rizkyekoputra.footballmatchschedule.View
 
 import com.example.rizkyekoputra.footballmatchschedule.model.Team
 

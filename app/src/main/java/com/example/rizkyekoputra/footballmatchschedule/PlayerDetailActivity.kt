@@ -11,12 +11,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
+import com.example.rizkyekoputra.footballmatchschedule.View.PlayerDetailView
 import com.example.rizkyekoputra.footballmatchschedule.model.Player
 import com.example.rizkyekoputra.footballmatchschedule.presenter.PlayerDetailPresenter
 import com.example.rizkyekoputra.footballmatchschedule.rest.ApiRepository
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import org.jetbrains.anko.*
 
 class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
