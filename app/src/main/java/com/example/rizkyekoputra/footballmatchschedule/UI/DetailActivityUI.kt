@@ -45,6 +45,12 @@ class DetailActivityUI : AnkoComponent<MatchDetailActivity> {
                                         bottomMargin = dip(10)
                                     }
 
+                                    owner.matchTimeTv = textView {
+                                    }.lparams {
+                                        gravity = Gravity.CENTER
+                                        bottomMargin = dip(10)
+                                    }
+
                                     linearLayout {
                                         orientation = LinearLayout.HORIZONTAL
 
@@ -52,13 +58,6 @@ class DetailActivityUI : AnkoComponent<MatchDetailActivity> {
                                             owner.homeBadgeIv = imageView {
                                             }.lparams(width = dip(90), height = dip(90)) {
                                                 gravity = Gravity.CENTER
-                                            }
-
-                                            owner.homeNameTv = textView {
-                                                gravity = Gravity.CENTER
-                                                textSize = 20f
-                                            }.lparams(matchParent, wrapContent) {
-                                                topMargin = dip(4)
                                             }
                                         }.lparams(width = dip(0), height = wrapContent) {
                                             weight = 3F
@@ -99,7 +98,32 @@ class DetailActivityUI : AnkoComponent<MatchDetailActivity> {
                                             }.lparams(width = dip(90), height = dip(90)) {
                                                 gravity = Gravity.CENTER
                                             }
+                                        }.lparams(width = dip(0), height = wrapContent) {
+                                            weight = 3F
+                                        }
+                                    }.lparams(matchParent, wrapContent)
 
+                                    linearLayout {
+                                        orientation = LinearLayout.HORIZONTAL
+
+                                        verticalLayout {
+                                            owner.homeNameTv = textView {
+                                                gravity = Gravity.CENTER
+                                                textSize = 20f
+                                            }.lparams(matchParent, wrapContent) {
+                                                topMargin = dip(4)
+                                            }
+                                        }.lparams(width = dip(0), height = wrapContent) {
+                                            weight = 3F
+                                        }
+
+                                        verticalLayout {
+                                        }.lparams(width = dip(0), height = wrapContent) {
+                                            gravity = Gravity.CENTER
+                                            weight = 2F
+                                        }
+
+                                        verticalLayout {
                                             owner.awayNameTv = textView {
                                                 gravity = Gravity.CENTER
                                                 textSize = 20f

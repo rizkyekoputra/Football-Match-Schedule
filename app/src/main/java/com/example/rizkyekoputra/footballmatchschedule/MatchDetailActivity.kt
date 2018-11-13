@@ -15,6 +15,7 @@ import com.example.rizkyekoputra.footballmatchschedule.R.id.add_to_favorite
 import com.example.rizkyekoputra.footballmatchschedule.R.menu.detail_menu
 import com.example.rizkyekoputra.footballmatchschedule.UI.DetailActivityUI
 import com.example.rizkyekoputra.footballmatchschedule.Utils.formatDateToString
+import com.example.rizkyekoputra.footballmatchschedule.Utils.formatTimeToString
 import com.example.rizkyekoputra.footballmatchschedule.Utils.replaceColonWithNewLine
 import com.example.rizkyekoputra.footballmatchschedule.View.DetailView
 import com.example.rizkyekoputra.footballmatchschedule.helper.database
@@ -37,6 +38,7 @@ import org.jetbrains.anko.support.v4.onRefresh
 class MatchDetailActivity : AppCompatActivity(), DetailView {
 
     lateinit var matchDateTv: TextView
+    lateinit var matchTimeTv: TextView
     lateinit var homeBadgeIv: ImageView
     lateinit var awayBadgeIv: ImageView
     lateinit var homeScoreTv: TextView
@@ -108,6 +110,7 @@ class MatchDetailActivity : AppCompatActivity(), DetailView {
 
     private fun initData(event: Event) {
         matchDateTv.text = event.dateEvent?.let { formatDateToString(it) }
+        matchTimeTv.text = event.timeDisplay?.let { formatTimeToString(it) }
         homeNameTv.text = event.homeTeamName
         homeScoreTv.text = event.homeScore.let { it?.toString() ?: "" }
         awayNameTv.text = event.awayTeamName
