@@ -3,6 +3,9 @@ package com.example.rizkyekoputra.footballmatchschedule.model
 import com.google.gson.annotations.SerializedName
 
 data class Player(
+        @SerializedName("idPlayer")
+        var playerId: String? = null,
+
         @SerializedName("strPlayer")
         var playerName: String? = null,
 

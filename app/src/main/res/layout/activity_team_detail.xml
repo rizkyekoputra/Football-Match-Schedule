@@ -43,22 +43,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:textSize="20sp"
-                    android:text="asdasd" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/team_detail_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="asdasd" />
+                    android:layout_gravity="center" />
 
                 <TextView
                     android:id="@+id/team_detail_stadium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="asdasd" />
+                    android:layout_gravity="center" />
 
             </LinearLayout>
 

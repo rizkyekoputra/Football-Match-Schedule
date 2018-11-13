@@ -21,4 +21,6 @@
     <item name="player_thumb" type="id" />
     <item name="player_name" type="id" />
     <item name="player_position" type="id" />
+    <item name="player_weight" type="id" />
+    <item name="player_height" type="id" />
 </resources>
