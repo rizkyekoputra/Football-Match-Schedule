@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
@@ -41,6 +42,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.teams)
         setHasOptionsMenu(true)
 
         val spinnerItems = resources.getStringArray(league)

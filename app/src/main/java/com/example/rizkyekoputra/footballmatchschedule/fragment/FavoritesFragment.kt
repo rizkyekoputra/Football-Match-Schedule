@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
 import kotlinx.android.synthetic.main.favorites_fragment.*
+import android.support.v7.app.AppCompatActivity
 
 class FavoritesFragment : Fragment() {
 
@@ -18,10 +19,11 @@ class FavoritesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.favorites)
 
         val fragmentAdapter = ViewPagerAdapter(childFragmentManager).apply {
             populateFragment(FavoriteMatchesFragment.newInstance(), getString(R.string.matches))
-            populateFragment(FavoriteTeamsFragment.newInstance(), getString(R.string.favorites))
+            populateFragment(FavoriteTeamsFragment.newInstance(), getString(R.string.teams))
         }
         viewpager_favorite.adapter = fragmentAdapter
 

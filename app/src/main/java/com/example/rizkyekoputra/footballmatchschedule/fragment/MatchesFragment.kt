@@ -2,6 +2,7 @@ package com.example.rizkyekoputra.footballmatchschedule.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.example.rizkyekoputra.footballmatchschedule.R
@@ -19,6 +20,7 @@ class MatchesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.matches)
         setHasOptionsMenu(true)
 
         val fragmentAdapter = ViewPagerAdapter(childFragmentManager).apply {
