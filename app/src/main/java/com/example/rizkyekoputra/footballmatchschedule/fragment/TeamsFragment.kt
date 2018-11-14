@@ -42,7 +42,6 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         val spinnerItems = resources.getStringArray(league)
         val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
@@ -101,7 +100,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
                     progressBar = progressBar {
                     }.lparams{
-                        centerHorizontally()
+                        centerInParent()
                     }
                 }
             }

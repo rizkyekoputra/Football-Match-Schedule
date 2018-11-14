@@ -3,7 +3,6 @@ package com.example.rizkyekoputra.footballmatchschedule
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.rizkyekoputra.footballmatchschedule.R.id.*
-import com.example.rizkyekoputra.footballmatchschedule.fragment.FavoriteMatchesFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.FavoritesFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.MatchesFragment
 import com.example.rizkyekoputra.footballmatchschedule.fragment.TeamsFragment

@@ -26,4 +26,8 @@ object TheSportDBApi {
     fun getPlayersById(playerId: String?): String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.LOOKUP_PLAYER}?id=" + playerId
     }
+
+    fun searchEventByEventName(eventName: String?): String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/${BuildConfig.SEARCH_EVENTS}?e=" + eventName
+    }
 }

@@ -18,9 +18,10 @@ fun formatDateToString(date: Date): String {
 }
 
 fun formatTimeToString(time: String): String {
-    val formatter = SimpleDateFormat("HH:mm:ssXXX", Locale.getDefault())
-    val time = Time(formatter.parse(time).time).toString().split(':')
-    return "${time[0]}:${time[1]}"
+    val pattern = (if (time.length > 8) "HH:mm:ssXXX" else if (time.length > 5) "HH:mm:ss" else "HH:mm")
+    val formatter = SimpleDateFormat(pattern, Locale.getDefault())
+    val times = Time(formatter.parse(time).time).toString().split(':')
+    return "${times[0]}:${times[1]}"
 }
 
 fun replaceColonWithNewLine(string: String): String {

@@ -23,4 +23,5 @@
     <item name="player_position" type="id" />
     <item name="player_weight" type="id" />
     <item name="player_height" type="id" />
+    <item name="list_event_search" type="id" />
 </resources>

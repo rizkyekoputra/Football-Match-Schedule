@@ -20,6 +20,7 @@ android {
         buildConfigField "String", "SEARCH_ALL_TEAMS", "\"search_all_teams.php\""
         buildConfigField "String", "LOOKUP_ALL_PLAYERS", "\"lookup_all_players.php\""
         buildConfigField "String", "LOOKUP_PLAYER", "\"lookupplayer.php\""
+        buildConfigField "String", "SEARCH_EVENTS", "\"searchevents.php\""
     }
     buildTypes {
         release {
