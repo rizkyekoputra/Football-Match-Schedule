@@ -20,17 +20,16 @@ import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
-class SearchResultsActivity : AppCompatActivity(), MatchView {
+class SearchMatchResultsActivity : AppCompatActivity(), MatchView {
 
-    private lateinit var adapter: MatchAdapter
     private var events : MutableList<Event> = mutableListOf()
+    private lateinit var adapter: MatchAdapter
     private lateinit var mPresenter: SearchMatchPresenter
     private lateinit var listEvent: RecyclerView
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_results)
 
         val query = intent.getStringExtra(SearchManager.QUERY)
 
@@ -89,7 +88,7 @@ class SearchResultsActivity : AppCompatActivity(), MatchView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
         (menu?.findItem(R.id.search)?.actionView as SearchView?).apply {
-            this?.queryHint = getString(R.string.search_hint)
+            this?.queryHint = getString(R.string.search_hint_matches)
 
             this?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {

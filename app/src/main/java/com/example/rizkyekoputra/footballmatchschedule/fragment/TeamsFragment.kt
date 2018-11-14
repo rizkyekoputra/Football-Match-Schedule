@@ -6,17 +6,17 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.*
 import com.example.rizkyekoputra.footballmatchschedule.R
 import com.example.rizkyekoputra.footballmatchschedule.R.array.league
 import com.example.rizkyekoputra.footballmatchschedule.R.color.colorAccent
+import com.example.rizkyekoputra.footballmatchschedule.SearchTeamResultsActivity
 import com.example.rizkyekoputra.footballmatchschedule.TeamDetailActivity
-import com.example.rizkyekoputra.footballmatchschedule.View.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.Utils.invisible
 import com.example.rizkyekoputra.footballmatchschedule.Utils.visible
+import com.example.rizkyekoputra.footballmatchschedule.View.TeamsView
 import com.example.rizkyekoputra.footballmatchschedule.adapter.TeamsAdapter
 import com.example.rizkyekoputra.footballmatchschedule.model.Team
 import com.example.rizkyekoputra.footballmatchschedule.presenter.TeamsPresenter
@@ -41,6 +41,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
 
         val spinnerItems = resources.getStringArray(league)
         val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
@@ -120,5 +121,26 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         teams.clear()
         teams.addAll(data)
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.options_menu, menu)
+
+        (menu?.findItem(R.id.search)?.actionView as SearchView?).apply {
+            this?.queryHint = getString(R.string.search_hint_teams)
+
+            this?.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    context?.startActivity<SearchTeamResultsActivity>("query" to query)
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String): Boolean {
+
+                    return false
+                }
+            })
+        }
     }
 }

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.example.rizkyekoputra.footballmatchschedule.R
-import com.example.rizkyekoputra.footballmatchschedule.SearchResultsActivity
+import com.example.rizkyekoputra.footballmatchschedule.SearchMatchResultsActivity
 import com.example.rizkyekoputra.footballmatchschedule.adapter.ViewPagerAdapter
 import kotlinx.android.synthetic.main.macthes_fragment.*
 import org.jetbrains.anko.startActivity
@@ -35,11 +35,11 @@ class MatchesFragment : Fragment() {
         inflater?.inflate(R.menu.options_menu, menu)
 
         (menu?.findItem(R.id.search)?.actionView as SearchView?).apply {
-            this?.queryHint = getString(R.string.search_hint)
+            this?.queryHint = getString(R.string.search_hint_matches)
 
             this?.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    context?.startActivity<SearchResultsActivity>("query" to query)
+                    context?.startActivity<SearchMatchResultsActivity>("query" to query)
                     return false
                 }
 

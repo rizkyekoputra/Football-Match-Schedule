@@ -29,12 +29,11 @@
         <activity
             android:name=".PlayerDetailActivity"
             android:parentActivityName=".TeamDetailActivity" />
-        <activity android:name=".SearchResultsActivity"
-            android:parentActivityName=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".SearchMatchResultsActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".SearchTeamResultsActivity"
+            android:parentActivityName=".HomeActivity" />
     </application>
 
 </manifest>

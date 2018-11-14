@@ -26,7 +26,8 @@
     <string name="overview">OVERVIEW</string>
     <string name="player">PLAYERS</string>
     <string name="search_title">search_title</string>
-    <string name="search_hint">Search matches</string>
+    <string name="search_hint_matches">Search matches</string>
+    <string name="search_hint_teams">Search teams</string>
     <string name="search_result">Search result</string>
 
     <array name="league">
