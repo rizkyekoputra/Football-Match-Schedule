@@ -1,2 +1,2 @@
 # Football-Match-Schedule
-Application for football match update
+Football Apps that using API from TheSportsDB.
