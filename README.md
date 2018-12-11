@@ -1,5 +1,6 @@
 # Football-Match-Schedule
 Football Apps that using API from TheSportsDB.
+The app layout mostly created with anko layout.
 
 # Features
 1. Match schedule base on league.
